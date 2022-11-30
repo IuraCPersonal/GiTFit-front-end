@@ -1,0 +1,32 @@
+.signInWrapper {
+    display: grid;
+    background-color: #131F2B;
+    color: #666666;
+    width: 450px;
+    border-radius: 14px;
+}
+
+.signInFields {
+    padding-top: 20px;
+    background-color: #131F2B;
+    border-radius: 14px;
+}
+
+.inputSignIn {
+    background-color: #131F2B;
+}
+
+.SignInFormButton {
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+}
+
+.registerLink {
+    padding-top: 20px;
+    color: #2F80ED;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 15px;
+}

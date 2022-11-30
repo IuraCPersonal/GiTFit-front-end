@@ -1,0 +1,55 @@
+#+TITLE: PBL DAS Gymbook
+#+AUTHOR: FCIM FAF-20
+#+DESCRIPTION: A Better Gym App
+
+** TABLE OF CONTENTS :toc:
+  - [[#introduction][INTRODUCTION]]
+  - [[#implementation][IMPLEMENTATION]]
+  - [[#contributors][CONTRIBUTORS]]
+  - [[#contact][CONTACT]]
+
+** INTRODUCTION
+
+The current repository represents our work for the =DAS= course at =TUM=, supervised by =SaltEdge=.
+
+*** PROBLEM OVERVIEW
+Practicing some form of fitness - be it weightlifting, cardio, hiking, yoga etc. is a must in the world of today, when most qualified job positions require people to be sitting at a computer desk for longer periods of time. This largely sedentary lifestyle along with the readily-available commodities and excesses of modern society have lead to the necessity of health-conscious people to allocate a certain portion of their day to working out. It becomes awfully obvious that the fitness industry is worth looking into. In 2020, before the Covid 19 pandemy had started, the gym industry was worth $96.7 billion. 
+
+An app targeting coaches and their clients would reasonably target a wide slice of the ”fitness sphere” as opposed to targeting professional athletes, for example. Surely it would also be an advantage for the casual gym-goer to be able to use the application without the explicit need of a trainer/coach. 
+
+Targeting this demographic should prove impactful, as as of 2017, 12.5\% of gym members use personal trainers. In fact, there’s been a 44\% rise in the number of personal trainers over the last ten years before 2017 [2]. This is proof that the potential target group is not only relevant, but increasing in relevancy. Thus, an app that benefits trainers and their clients separately, but also facilitates the communication between them should theoretically prove to have a large demographic and bring something useful to society.
+
+*** SOLUTION
+The proposed way of solving the above mentioned problems is a web application which will help gym coaches track and manage the progress of their clients. In other words - a Gym Progress Manager for Coaches. Users will be classified into 2 main categories, which constitute the target audience: Coaches - those who work at the gym, and Clients - those who go to the gym.
+
+The features of the app will be the following:
+     - Coaches will be able to see a list of their clients and their metrics (such as weight, fat percentage, waist length, records, etc.). The list of metrics will be customizable according to each Client’s needs, and both the Client and the Coach will have access to the history of metrics.
+     - Coaches will be able to add notes for their clients, diet recommendations or workout routines.
+     - Handling payments using Salt Edge API, which will allow customers pay for coaching payments.
+     - A calendar will be integrated in the app which will make the process of programming new sessions easier and help with time management.
+
+The app will be built with an emphasis on security, all the necessary functionalities being added in order to keep security vulnerabilities at bay.
+
+** IMPLEMENTATION
+
+*** TECHNOLOGIES
+Backend: Java spring
+Frontend: React.js
+Database: MySQL
+
+APIs used:
+Salt sEdge API for in-app payments
+
+** CONTRIBUTORS
+
+- [[https://github.com/AndreeaCvl][AndreeaCvl]]
+- [[https://github.com/IuraCPersonal][IuraCPersonal]]
+- [[https://github.com/razvanfiser][razvanfiser]]
+- [[https://github.com/liviumocanup][liviumocanup]]
+- [[https://github.com/MoiseiLiviu][MoiseiLiviu]]
+
+** CONTACT
+
+    If you have any questions, please contact us on any of the following emails:
+     - iurie.cius@isa.utm.md
+     - andreea.covalevschi@isa.utm.md
