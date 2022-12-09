@@ -11,6 +11,7 @@ import ClientsPage from './views/ClientsPage/ClientsPage.js';
 import ClientPage from './views/ClientsPage/ClientPage.js';
 import SignInPage from './views/SignInPage/SignInPage';
 import ClientUserPage from './views/ClientUserPage/ClientUserPage.js';
+import CoachPage from './views/CoachPage/CoachPage.js'
 
 
 var hist = createBrowserHistory();
@@ -25,6 +26,7 @@ root.render(
       <Route path='/client' component={ClientPage}/>
       <Route path='/sign-in' component={SignInPage}/>
       <Route path='/my-page' component={ClientUserPage}/>
+      <Route path='/coach-page' component={CoachPage}/>
       <Route path="/" component={SignInPage} />
     </Switch>
   </Router>,

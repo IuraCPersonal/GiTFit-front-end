@@ -12,11 +12,11 @@ import {
   
 const Navbar = ({toggle}) => {
 
-let history = useHistory();
+  let history = useHistory();
 
-const redirectSignUpPage = () => {
-  history.push('/sign-up')
-}
+  const redirectSignUpPage = () => {
+    history.push('/sign-up')
+  }
 
   return (
     
