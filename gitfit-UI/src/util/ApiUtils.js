@@ -49,3 +49,35 @@ export function getClient(){
         method:'GET',
     })
 }
+
+export function getClientByID(id){
+    return request({
+        url:API_BASE_URL+`/v1/client/${id}`,
+        method:'GET'
+    })
+}
+
+/*COACH CONTROLLER*/ 
+export function addCoachDetails(coachDetails){
+    return request({
+        url:API_BASE_URL+`/v1/user/coach/details`,
+        method:'PUT',
+        body:JSON.stringify(coachDetails)
+    })
+}
+
+export function getCoachSchedule(date){
+    return request({
+        url:API_BASE_URL+`/v1/user/coach/schedule`,
+        method:'GET',
+        body:JSON.stringify(date)
+    })
+}
+
+export function sessionSchedule(sessionData){
+    return request({
+        url:API_BASE_URL+`/v1/user/coach/schedule`,
+        method:'POST',
+        body:JSON.stringify(sessionData)
+    })
+}
