@@ -1,0 +1,27 @@
+.CoachUserPageWrapper {
+    display: grid;
+    grid-template-columns: 8fr 11fr;
+    column-gap: 87px;
+    background-color: #131F2B;
+    width: 1065px;
+}
+
+.CoachUserPageLeft{
+    display: grid;
+    background-color: #282D35;
+    grid-column: 1;
+    border-radius: 16px;
+}
+
+.CoachUserPageRight{
+    display: grid;
+    background-color: #282D35;
+    grid-column: 2;
+    border-radius: 16px;
+}
+
+.CoachProfileHeader{
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+}

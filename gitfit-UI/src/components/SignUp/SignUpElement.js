@@ -71,7 +71,7 @@ export default function SignUpElement() {
             <div style = {{position: "relative", marginTop: "3px", marginLeft: "40px"}}>I would like to sign up as a coach</div>
           </div>
           <div className="formButton">
-            <input type="submit" value="Go"/>
+            <input type="submit" value="Go" onClick={redirectSignUpPage}/>
           </div>
         </form>
       </div>
