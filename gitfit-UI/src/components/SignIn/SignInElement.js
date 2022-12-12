@@ -15,10 +15,6 @@ export default function SignInElement() {
     history.push('/sign-up')
   }
 
-  const redirectMainPage = () => {
-    history.push('/about')
-  }
-
   const [email,setEmail] = React.useState("");
   const [password,setPassword] = React.useState("");
 

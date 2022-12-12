@@ -19,13 +19,13 @@ export default function SignUpElement() {
   const [password,setPassword] = React.useState("");
   const [confirmPassword, setConfirmPassword] = React.useState("");
   const [username,setUsername] = React.useState("");
-  const [checked, setChecked] = React.useState(true);
-  const [birthday, setBirthday] = React.useState("22-12-12");
+  const [checked, setChecked] = React.useState(false);
+  const [birthday, setBirthday] = React.useState("2022-12-12");
   const [userType, setUserType] = React.useState("CLIENT")
   
   const handleChange = () => {
     setChecked(!checked);
-    if (checked) {
+    if (!checked) {
       setUserType('COACH');
     } else {
       setUserType("CLIENT");
@@ -58,9 +58,11 @@ export default function SignUpElement() {
 
   const handleSubmit = event => {
     event.preventDefault();
-    const signUpRequest = {username, surname, firstName, email, password, birthday, userType}
-    signup(signUpRequest).then(response=>history.push("/sign-in"));
-    /*console.log(username, surname, firstName, email, password, birthday, userType);*/
+    if (password === confirmPassword) {
+      const signUpRequest = {username, surname, firstName, email, password, birthday, userType}
+      signup(signUpRequest).then(response=>{history.push("/sign-in")});
+      /*console.log(username, surname, firstName, email, password, birthday, userType);*/
+    }
   }
 
 

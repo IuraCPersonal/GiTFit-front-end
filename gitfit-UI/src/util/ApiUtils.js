@@ -29,7 +29,7 @@ export const request = options=>{
 
 export function signup(signUpRequest){
     return request({
-        url:API_BASE_URL+'/auth/register',
+        url:API_BASE_URL+'/v1/auth/register',
         method:'POST',
         body:JSON.stringify(signUpRequest)
     })
@@ -37,8 +37,15 @@ export function signup(signUpRequest){
 
 export function login(loginRequest){
     return request({
-        url:API_BASE_URL+'/auth/login',
+        url:API_BASE_URL+'/v1/auth/login',
         method:'POST',
         body:JSON.stringify(loginRequest)
+    })
+}
+
+export function getClient(){
+    return request({
+        url:API_BASE_URL+'/v1/client',
+        method:'GET',
     })
 }
