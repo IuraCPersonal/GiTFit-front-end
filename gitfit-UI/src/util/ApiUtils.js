@@ -43,6 +43,8 @@ export function login(loginRequest){
     })
 }
 
+
+/* CLIENT CONTROLLER */
 export function getClient(){
     return request({
         url:API_BASE_URL+'/v1/client',
@@ -79,5 +81,35 @@ export function sessionSchedule(sessionData){
         url:API_BASE_URL+`/v1/user/coach/schedule`,
         method:'POST',
         body:JSON.stringify(sessionData)
+    })
+}
+
+/*User Controller*/
+export function getPending(){
+    return request({
+        url:API_BASE_URL+`/v1/user/connect/pending`,
+        method:'GET'
+    })
+}
+
+export function getUserDataByID(id){
+    return request({
+        url:API_BASE_URL+`/v1/user/${id}`,
+        method:'GET'
+    })
+}
+
+export function sendRequest(targetUserId){
+    return request({
+        url:API_BASE_URL+`/v1/user/connect/${targetUserId}`,
+        method:'POST'
+    })
+}
+
+export function answerRequest(requestId, answer){
+    return request({
+        url:API_BASE_URL+`/v1/user/connect/pending/${requestId}`,
+        method:'POST',
+        body:JSON.stringify(answer)
     })
 }
