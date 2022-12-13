@@ -13,6 +13,7 @@ import SignInPage from './views/SignInPage/SignInPage';
 import ClientUserPage from './views/ClientUserPage/ClientUserPage.js';
 import CoachUserPage from './views/CoachUserPage/CoachUserPage.js';
 import CoachPage from './views/CoachPage/CoachPage.js'
+import SearchResultsPage from './views/SearchResultPage/SearchResultPage.js'
 
 
 var hist = createBrowserHistory();
@@ -28,6 +29,7 @@ root.render(
       <Route path='/coach-page' component={CoachPage}/>
       <Route path='/my-page-user' component={ClientUserPage}/>
       <Route path='/my-page-coach' component={CoachUserPage}/>
+      <Route path='/search' component={SearchResultsPage}/>
       <Route path='/client' component={ClientPage}/>
       <Route path="/" component={SignInPage} />
     </Switch>

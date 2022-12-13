@@ -11,7 +11,9 @@ import './ClientUserPageElement.css';
 
 export default function ClientPageElement() {
 
+    const history = useHistory();
     const [date, setDate] = useState(new Date());
+    const [coachName, setCoachName] = useState("");
 
     const onDateChange = (newDate) => {
         setDate(newDate);
@@ -22,6 +24,22 @@ export default function ClientPageElement() {
         // 👇️ prevent page refresh
         event.preventDefault();
         console.log('form submitted');
+        history.push({
+            pathname:"/search",
+            state:{name:coachName}
+        });
+    };
+
+    const handleCoachSearchSubmit = event => {
+        event.preventDefault();
+        console.log(coachName);
+    }
+
+    const handleInputChange = e => {
+        const {id , value} = e.target;
+        if(id === "coachName"){
+            setCoachName(value);
+        }
     };
 
     const current = new Date();
@@ -33,6 +51,15 @@ export default function ClientPageElement() {
         <div className="clientPageWrapper">
             <div className="left">
                 <div className="clientPageCalendar"><Calendar onChange={onDateChange} value={date} /></div>
+
+                <div className="clientLatestStats"><div className="latestStatsTitleWrapper">
+                        <div style={{fontWeight: "700", fontSize: "37px"}}>Your Coach</div>
+                        <form>
+                            <input style={{height: "50px"}} type="text" value={coachName} onChange = {(e) => handleInputChange(e)} id="coachName"  placeholder="Search coach"/>
+                            <button onClick={handleCoachSearchSubmit}>Search</button>
+                        </form>
+                    </div>
+                </div>
 
                 <div className="clientLatestStats">
                     <div className="clientProfileWrapper">
