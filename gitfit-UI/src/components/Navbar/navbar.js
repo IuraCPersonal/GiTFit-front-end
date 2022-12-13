@@ -13,7 +13,7 @@ import {
 import {getClient} from "../../util/ApiUtils";
 
   
-const Navbar = ({toggle, role, id}) => {
+const Navbar = ({toggle, user, role, id}) => {
 
   const [clientLastName, setClientLastName] = React.useState([]);
   const [clientFirstName, setClientFirstName] = React.useState([]);
@@ -36,38 +36,42 @@ const Navbar = ({toggle, role, id}) => {
       setFirstLink('/coach-page')
       setSecondLink('/my-page-user')
     }
-   console.log(role);
   }, []);
 
   let history = useHistory();
 
-  const redirectSignUpPage = () => {
-    history.push('/sign-up')
+  const redirectFirstPage = () => {
+    history.push({pathname: firstLink, state: {user: user}});
+  }
+  const redirectSecondPage = () => {
+    history.push({pathname: secondLink, state: {user: user}});
+  }
+  const redirectMainPage = () => {
+    history.push({pathname: '/about', state: {user: user}});
   }
 
   return (
     
     <>
-      <Nav>
+      <div><Nav>
+        
         <Bars onClick={toggle}/>
-        <NavLogo to='/about' /*state={{ user: "occupation" }}*/>GiTFit</NavLogo>
-        <NavMenu>
-        <NavLink to='/about' activeStyle>
-            Main
-          </NavLink>
-          <NavLink to={firstLink} activeStyle>
+          <div style={{color: "white", cursor: "pointer", paddingTop: "30px"}} onClick={redirectFirstPage}>
             {firstText}
-          </NavLink>
-          <NavLink to={secondLink} activeStyle>
+          </div>
+          <div style={{color: "white", cursor: "pointer", paddingTop: "30px"}} onClick={redirectMainPage}>
+            Main
+          </div>
+          <div style={{color: "white", cursor: "pointer", paddingTop: "30px"}} onClick={redirectSecondPage}>
             Logged in <br/> Name Surname
-        </NavLink>
+          </div>
+      
           {/* Second Nav */}
           {/* <NavBtnLink to='/sign-in'>Sign In</NavBtnLink> */}
-        </NavMenu>
         {/*<NavBtn>
           <NavBtnLink to='/sign-up'>Sign Up</NavBtnLink>
         </NavBtn>*/}
-      </Nav>
+      </Nav></div>
     </>
   );
 };
