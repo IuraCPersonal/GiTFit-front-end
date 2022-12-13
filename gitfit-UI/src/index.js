@@ -11,6 +11,7 @@ import ClientsPage from './views/ClientsPage/ClientsPage.js';
 import ClientPage from './views/ClientsPage/ClientPage.js';
 import SignInPage from './views/SignInPage/SignInPage';
 import ClientUserPage from './views/ClientUserPage/ClientUserPage.js';
+import CoachUserPage from './views/CoachUserPage/CoachUserPage.js';
 import CoachPage from './views/CoachPage/CoachPage.js'
 
 
@@ -22,11 +23,12 @@ root.render(
     <Switch>
       <Route path="/about" component={AboutUsPage} />
       <Route path="/sign-up" component={SignUpPage}/>
-      <Route path='/clients' component={ClientsPage}/>
-      <Route path='/client' component={ClientPage}/>
       <Route path='/sign-in' component={SignInPage}/>
-      <Route path='/my-page' component={ClientUserPage}/>
+      <Route path='/clients' component={ClientsPage}/>
       <Route path='/coach-page' component={CoachPage}/>
+      <Route path='/my-page-user' component={ClientUserPage}/>
+      <Route path='/my-page-coach' component={CoachUserPage}/>
+      <Route path='/client' component={ClientPage}/>
       <Route path="/" component={SignInPage} />
     </Switch>
   </Router>,

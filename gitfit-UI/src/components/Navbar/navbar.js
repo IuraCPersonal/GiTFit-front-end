@@ -19,13 +19,13 @@ const Navbar = ({toggle}) => {
   const [clientFirstName, setClientFirstName] = React.useState([]);
 
 
-  useEffect(() => {
+  /*useEffect(() => {
     getClient().then((response) => {
       console.log(response);
       setClientLastName(response[0].lastName);
       setClientFirstName(response[0].name);
    })
-  }, []);
+  }, []);*/
 
   let history = useHistory();
 
@@ -46,7 +46,7 @@ const Navbar = ({toggle}) => {
           <NavLink to='/clients' activeStyle>
             Clients
           </NavLink>
-          <NavLink to='/settings' activeStyle>
+          <NavLink to='/my-page-user' activeStyle>
             Logged in <br/> Name Surname
         </NavLink>
           {/* Second Nav */}
