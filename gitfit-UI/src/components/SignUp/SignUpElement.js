@@ -5,7 +5,7 @@ import { NavLink as Link } from 'react-router-dom';
 import './SignUpElement.css';
 
 import {NAME_MAX_LENGTH,NAME_MIN_LENGTH,USERNAME_MIN_LENGTH,USERNAME_MAX_LENGTH,PASSWORD_MIN_LENGTH,PASSWORD_MAX_LENGTH,EMAIL_MIN_LENGTH,EMAIL_MAX_LENGTH} from "../../constants";
-import { signup,checkEmailAvailability,checkUsernameAvailability } from "../../util/ApiUtils";
+import { signup } from "../../util/ApiUtils";
 
 
 export default function SignUpElement() {
