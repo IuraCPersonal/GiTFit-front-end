@@ -60,7 +60,7 @@ export default function SignUpElement() {
     event.preventDefault();
     if (password === confirmPassword) {
       const signUpRequest = {username, surname, firstName, email, password, birthday, userType}
-      signup(signUpRequest).then(response=>{history.push("/sign-in")});
+      signup(signUpRequest).then(history.push({pathname: "/sign-in"}));
       /*console.log(username, surname, firstName, email, password, birthday, userType);*/
     }
   }

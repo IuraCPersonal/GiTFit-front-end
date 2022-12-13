@@ -38,8 +38,8 @@ export default function SignInElement() {
     login(loginRequest).then(response=>{
       if(response.accessToken){
         localStorage.setItem("accessToken",response.accessToken);
-        history.push("/about");
       }
+      history.push({pathname: "/about", state: response.id});
     })
   }
 
@@ -55,7 +55,7 @@ export default function SignInElement() {
                     <input  className="formInput" type="password" value={password} onChange = {(e) => handleInputChange(e)} id="password"  placeholder="Password" />
                 </div>
                 <div className="SignInFormButton">
-                    <input type="submit" value="Go" onClick={handleSubmit}/>
+                    <input type="submit" value="Go" onClick={handleSubmit} />
                 </div>
             </form>
             <div className="registerLink" onClick={redirectSignUpPage}>

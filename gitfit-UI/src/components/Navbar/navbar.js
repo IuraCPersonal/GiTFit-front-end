@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {useHistory} from 'react-router-dom';
 import {
   Nav,
@@ -9,8 +9,23 @@ import {
   NavBtn,
   NavBtnLink,
 } from './navbarElements';
+
+import {getClient} from "../../util/ApiUtils";
+
   
 const Navbar = ({toggle}) => {
+
+  const [clientLastName, setClientLastName] = React.useState([]);
+  const [clientFirstName, setClientFirstName] = React.useState([]);
+
+
+  useEffect(() => {
+    getClient().then((response) => {
+      console.log(response);
+      setClientLastName(response[0].lastName);
+      setClientFirstName(response[0].name);
+   })
+  }, []);
 
   let history = useHistory();
 
@@ -31,11 +46,8 @@ const Navbar = ({toggle}) => {
           <NavLink to='/clients' activeStyle>
             Clients
           </NavLink>
-          <NavLink to='/payments' activeStyle>
-            Payments
-          </NavLink>
           <NavLink to='/settings' activeStyle>
-            Logged in <br/> Jacob Jones
+            Logged in <br/> Name Surname
         </NavLink>
           {/* Second Nav */}
           {/* <NavBtnLink to='/sign-in'>Sign In</NavBtnLink> */}
