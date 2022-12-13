@@ -1,4 +1,4 @@
-import React , {useState} from "react";
+import React , {useState, useEffect} from "react";
 import Calendar from 'react-calendar'
 import { BrowserRouter as Router, useHistory} from "react-router-dom";
 import { NavLink as Link } from 'react-router-dom';
@@ -8,7 +8,7 @@ import userPhoto from "../../assets/img/userPhoto.jpg"
 
 import './CoachUserPageElement.css';
 
-import { addCoachDetails } from "../../util/ApiUtils";
+import { addCoachDetails, getUserDataByID } from "../../util/ApiUtils";
 
 
 export default function CoachPageElement() {
@@ -18,6 +18,21 @@ export default function CoachPageElement() {
     const[gymAddress,setAddress] = useState("");
     const[ratePerHour,setRatePerHour] = useState("");
 
+    //GET THE ID OF CURRENT USER
+    const[userId, setId] = useState('6');
+
+    const[viewAbout, setViewAbout] = useState("");
+    const[viewRatePerHour, setViewRatePerHour] = useState("");
+    const[viewAddrress, setViewAddrress] = useState("");
+
+    useEffect(() => {
+        getUserDataByID(userId).then((response) => {
+          console.log(response);
+          setViewAbout(response.aboutMe);
+          setViewAddrress(response.gymAddress);
+          setViewRatePerHour(response.ratePerHour);
+       })
+    }, []);
 
     const onDateChange = (newDate) => {
         setDate(newDate);
@@ -26,9 +41,13 @@ export default function CoachPageElement() {
 
     const handleSubmit = event => {
         // 👇️ prevent page refresh
-        event.preventDefault();
-        
-        const addDetailsRequest = {aboutMe, ratePerHour, gymAddress}
+        if (aboutMe === "") {
+            setAbout(viewAbout);
+        }
+        if (ratePerHour === "") {
+            setRatePerHour(viewRatePerHour);
+        }
+        const addDetailsRequest = {aboutMe, ratePerHour}
         addCoachDetails(addDetailsRequest);
         console.log((addDetailsRequest));
         console.log('form submitted');
@@ -57,11 +76,11 @@ export default function CoachPageElement() {
             <div className="left">
                 <div className="coachDetails">
                     <div className="titleCoachPage"style={{fontWeight: "700", fontSize: "25px"}}>About me</div>
-                    <div>I am a coach and here is something interesting about my activity.</div>
+                    <div>{viewAbout}</div>
                     <div className="titleCoachPage"style={{fontWeight: "700", fontSize: "25px"}}>Rate per hour</div>
-                    <div className="hourRate">8$</div>
-                    <div className="titleCoachPage"style={{fontWeight: "700", fontSize: "25px"}}>Gym Adress</div>
-                    <div>Str Stefan cel mare 225, Chisinau, Moldova</div>
+                    <div className="hourRate">{viewRatePerHour}$</div>
+                    {/*<div className="titleCoachPage"style={{fontWeight: "700", fontSize: "25px"}}>Gym Adress</div>
+                    <div>{viewAddrress}</div>*/}
                     <div style={{paddingTop:'20px', paddingBottom:'20px'}}><button  onClick={() => setToggle(!toggle)}>Edit</button></div>
 
                     {toggle && (
@@ -78,10 +97,10 @@ export default function CoachPageElement() {
                                 <input style={{height: "50px"}} type="text" value={ratePerHour} onChange = {(e) => handleInputChange(e)} id="ratePerHour" placeholder="$"/>
                             </label></div>
 
-                            <div style = {{ gridColumn: "2", gridRow: "2"}}><label>
+                             {/*<div style = {{ gridColumn: "2", gridRow: "2"}}><label>
                                 <div>Gym address</div>  
                                 <input style={{height: "50px"}} type="text" value={gymAddress} onChange = {(e) => handleInputChange(e)} id="address" placeholder="Gym Adress"/>
-                            </label></div>
+                    </label></div>*/}
 
                             <div>
                                 <input  type="submit" value="Submit" onClick={handleSubmit} style={{width: "172px", height: "56px"}}/>
