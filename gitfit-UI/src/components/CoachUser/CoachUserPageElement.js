@@ -11,22 +11,19 @@ import './CoachUserPageElement.css';
 import { addCoachDetails, getUserDataByID } from "../../util/ApiUtils";
 
 
-export default function CoachPageElement() {
+export default function CoachPageElement(user, role, id) {
 
     const [date, setDate] = useState(new Date());
     const[aboutMe,setAbout] = useState("");
     const[gymAddress,setAddress] = useState("");
     const[ratePerHour,setRatePerHour] = useState("");
 
-    //GET THE ID OF CURRENT USER
-    const[userId, setId] = useState('6');
-
     const[viewAbout, setViewAbout] = useState("");
     const[viewRatePerHour, setViewRatePerHour] = useState("");
     const[viewAddrress, setViewAddrress] = useState("");
 
     useEffect(() => {
-        getUserDataByID(userId).then((response) => {
+        getUserDataByID(user.id).then((response) => {
           console.log(response);
           setViewAbout(response.aboutMe);
           setViewAddrress(response.gymAddress);
@@ -40,7 +37,7 @@ export default function CoachPageElement() {
     }
 
     const handleSubmit = event => {
-        // 👇️ prevent page refresh
+        event.preventDefault()
         if (aboutMe === "") {
             setAbout(viewAbout);
         }
@@ -51,6 +48,7 @@ export default function CoachPageElement() {
         addCoachDetails(addDetailsRequest);
         console.log((addDetailsRequest));
         console.log('form submitted');
+        window.location.reload();
     };
 
     const handleInputChange = (e) => {
@@ -89,12 +87,12 @@ export default function CoachPageElement() {
 
                             <div><label>
                                 <div> About Me</div>  
-                                <input style={{height: "50px"}}  type="text" value={aboutMe} onChange = {(e) => handleInputChange(e)} id="aboutMe" placeholder="Something about your activity as a coach" />
+                                <input style={{height: "50px"}}  type="text" value={viewAbout} onChange = {(e) => handleInputChange(e)} id="aboutMe" placeholder="Something about your activity as a coach" />
                             </label></div>
 
                             <div><label>
                                 <div> Rate per hour (in dollars)</div>  
-                                <input style={{height: "50px"}} type="text" value={ratePerHour} onChange = {(e) => handleInputChange(e)} id="ratePerHour" placeholder="$"/>
+                                <input style={{height: "50px"}} type="text" value={viewRatePerHour} onChange = {(e) => handleInputChange(e)} id="ratePerHour" placeholder="$"/>
                             </label></div>
 
                              {/*<div style = {{ gridColumn: "2", gridRow: "2"}}><label>

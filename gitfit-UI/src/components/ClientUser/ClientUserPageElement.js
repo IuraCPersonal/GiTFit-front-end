@@ -9,7 +9,7 @@ import userPhoto from "../../assets/img/userPhoto.jpg"
 import './ClientUserPageElement.css';
 
 
-export default function ClientPageElement() {
+export default function ClientPageElement(user, role, id) {
 
     const history = useHistory();
     const [date, setDate] = useState(new Date());

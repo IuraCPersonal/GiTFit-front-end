@@ -32,7 +32,7 @@ export default function AboutUsPage(props) {
       <div>
         <Route>
           <Navbar
-            
+            user = {user}
             role={user.roles[0]}
             id={user.id}
           />
