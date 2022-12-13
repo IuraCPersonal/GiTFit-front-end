@@ -9,7 +9,7 @@ import postImage3 from "../../assets/img/postimage3.jpg"
 import { IoCall } from "react-icons/io5";
 import { MdEmail } from "react-icons/md"
 
-export default function AboutUsElement() {
+export default function AboutUsElement(role, id) {
   return (
 
     <div>

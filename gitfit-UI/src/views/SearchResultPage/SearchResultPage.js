@@ -6,10 +6,11 @@ import Navbar from "../../components/Navbar/navbar";
 import Sidebar from "../../components/Sidebar/sidebar";
 import CoachSearchElement from "../../components/Search/CoachSearchElement"
 
-export default function SearchResultsPage() {
+export default function SearchResultsPage(props) {
 
     const[isOpen, setIsOpen] = useState(false);
-  
+    const [results, setResults] = useState(props.location.state.name.results);
+
     const toggle = () => {
       setIsOpen(!isOpen)
     }

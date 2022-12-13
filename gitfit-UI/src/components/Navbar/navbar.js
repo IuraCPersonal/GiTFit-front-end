@@ -13,19 +13,31 @@ import {
 import {getClient} from "../../util/ApiUtils";
 
   
-const Navbar = ({toggle}) => {
+const Navbar = ({toggle, role, id}) => {
 
   const [clientLastName, setClientLastName] = React.useState([]);
   const [clientFirstName, setClientFirstName] = React.useState([]);
 
+  const [firstText, setFirstText] = React.useState([]);
+  const [firstLink, setFirstLink] = React.useState([]);
+  const [secondText, setSecondText] = React.useState([]);
+  const [secondLink, setSecondLink] = React.useState([]);
 
-  /*useEffect(() => {
-    getClient().then((response) => {
-      console.log(response);
-      setClientLastName(response[0].lastName);
-      setClientFirstName(response[0].name);
-   })
-  }, []);*/
+
+
+  useEffect(() => {
+    if (role === "COACH") {
+      setFirstText("Clients")
+      setFirstLink('/clients')
+      setSecondLink('/my-page-coach')
+    }
+    else {
+      setFirstText("Coach")
+      setFirstLink('/coach-page')
+      setSecondLink('/my-page-user')
+    }
+   console.log(role);
+  }, []);
 
   let history = useHistory();
 
@@ -38,15 +50,15 @@ const Navbar = ({toggle}) => {
     <>
       <Nav>
         <Bars onClick={toggle}/>
-        <NavLogo to='/about'>GiTFit</NavLogo>
+        <NavLogo to='/about' /*state={{ user: "occupation" }}*/>GiTFit</NavLogo>
         <NavMenu>
         <NavLink to='/about' activeStyle>
             Main
           </NavLink>
-          <NavLink to='/clients' activeStyle>
-            Clients
+          <NavLink to={firstLink} activeStyle>
+            {firstText}
           </NavLink>
-          <NavLink to='/my-page-user' activeStyle>
+          <NavLink to={secondLink} activeStyle>
             Logged in <br/> Name Surname
         </NavLink>
           {/* Second Nav */}
