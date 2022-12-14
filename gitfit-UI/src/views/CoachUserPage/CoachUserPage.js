@@ -10,7 +10,12 @@ export default function CoachUserPage(props) {
 
     const[isOpen, setIsOpen] = useState(false);
     const [user, setUser] = useState(props.location.state.user);
+    const [role, setRole] = useState(props.location.state.role);
+    const [id, setId] = useState(props.location.state.id);
 
+    useEffect(() => {
+      console.log(role)
+    }, []);
   
     const toggle = () => {
       setIsOpen(!isOpen)
@@ -25,16 +30,16 @@ export default function CoachUserPage(props) {
           <Route>
             <Navbar
               user = {user}
-              role={user.role}
-              id={user.id}
+              role={role}
+              id={id}
             />
             <Sidebar/>
           </Route>
           <div style = {{display: "flex", justifyContent: "center", paddingTop: "5%", paddingBottom: "30%"}}>
             <CoachUserPageElement
               user = {user}
-              role={user.roles[0]}
-              id={user.id}
+              role={role}
+              id={id}
             />
           </div>
       </div>

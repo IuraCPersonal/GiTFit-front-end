@@ -20,12 +20,10 @@ const Navbar = ({toggle, user, role, id}) => {
 
   const [firstText, setFirstText] = React.useState([]);
   const [firstLink, setFirstLink] = React.useState([]);
-  const [secondText, setSecondText] = React.useState([]);
   const [secondLink, setSecondLink] = React.useState([]);
 
-
-
   useEffect(() => {
+    console.log(id)
     if (role === "COACH") {
       setFirstText("Clients")
       setFirstLink('/clients')
@@ -45,13 +43,13 @@ const Navbar = ({toggle, user, role, id}) => {
   let history = useHistory();
 
   const redirectFirstPage = () => {
-    history.push({pathname: firstLink, state: {user: user}});
+    history.push({pathname: firstLink, state: {user: user, role: role, id: id}});
   }
   const redirectSecondPage = () => {
-    history.push({pathname: secondLink, state: {user: user}});
+    history.push({pathname: secondLink, state: {user: user, role: role, id: id}});
   }
   const redirectMainPage = () => {
-    history.push({pathname: '/about', state: {user: user}});
+    history.push({pathname: '/about', state: {user: user, role: role, id: id}});
   }
 
   return (
@@ -63,9 +61,9 @@ const Navbar = ({toggle, user, role, id}) => {
           <div style={{color: "white", cursor: "pointer", paddingTop: "30px"}} onClick={redirectFirstPage}>
             {firstText}
           </div>
-          <div style={{color: "white", cursor: "pointer", paddingTop: "30px"}} onClick={redirectMainPage}>
+          {/*<div style={{color: "white", cursor: "pointer", paddingTop: "30px"}} onClick={redirectMainPage}>
             Main
-          </div>
+  </div>*/}
           <div style={{color: "white", cursor: "pointer", paddingTop: "30px"}} onClick={redirectSecondPage}>
             Logged in <br/> {clientFirstName} {clientLastName}
           </div>

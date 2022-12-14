@@ -24,7 +24,6 @@ export default function CoachPageElement(user, role, id) {
 
     useEffect(() => {
         getUserDataByID(user.id).then((response) => {
-          console.log(response);
           setViewAbout(response.aboutMe);
           setViewAddrress(response.gymAddress);
           setViewRatePerHour(response.ratePerHour);
@@ -40,7 +39,6 @@ export default function CoachPageElement(user, role, id) {
         event.preventDefault()
 
         const addDetailsRequest = {aboutMe, ratePerHour}
-        console.log((addDetailsRequest));
         addCoachDetails(addDetailsRequest)
         setViewAbout(aboutMe);
         setViewRatePerHour(ratePerHour);

@@ -102,7 +102,8 @@ export function getUserDataByID(id){
 export function sendRequest(targetUserId){
     return request({
         url:API_BASE_URL+`/v1/user/connect/${targetUserId}`,
-        method:'POST'
+        method:'POST',
+        body:JSON.stringify(targetUserId)
     })
 }
 

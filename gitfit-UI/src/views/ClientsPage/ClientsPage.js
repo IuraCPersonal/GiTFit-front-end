@@ -13,20 +13,6 @@ export default function ClientsPage(props) {
   useEffect(() => {
     console.log(user);
   }, []);
-
-    const[isOpen, setIsOpen] = useState(false);
-  
-    const toggle = () => {
-      setIsOpen(!isOpen)
-    }
-  
-    const handleClick = () => {
-      console.log('button clicked');
-    };
-
-    useEffect(() => {
-     console.log(user.id);
-    }, []);
   
     return (
       <div style={{backgroundColor: "#131F2B"}}>

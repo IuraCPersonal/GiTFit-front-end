@@ -12,43 +12,29 @@ import { getUserDataByID } from "../../util/ApiUtils";
 
 export default function AboutUsPage(props) {
 
-  const[isOpen, setIsOpen] = useState(false);
-
-  const toggle = () => {
-    setIsOpen(!isOpen)
-  }
-
-  const handleClick = () => {
-    console.log('button clicked');
-  };
-
   const [user, setUser] = useState(props.location.state.user);
   const [userData, setUserData] = useState("");
   const [userId, setUserId] = useState("");
   const [usrRole, setUserRole] = useState("");
 
   useEffect(() => {
+    console.log(user.roles[0])
     getUserDataByID(user.id).then((response) => {
-      console.log(response);
       setUserId(response.id)
       setUserRole(response.userRole.name)
+      console.log(usrRole)
    })
 }, []);
-
-  useEffect(() => {
-    console.log(user);
-  }, []);
 
   return (
     <div>
       <div>
         <Route>
           <Navbar
-            user = {user}
+            user={user}
             role={usrRole}
             id={userId}
           />
-          <Sidebar/>
         </Route>
         <AboutUsElement
           role={usrRole}

@@ -6,8 +6,6 @@ import Navbar from "../../components/Navbar/navbar";
 import Sidebar from "../../components/Sidebar/sidebar";
 import CoachSearchElement from "../../components/Search/CoachSearchElement"
 
-import { getCoachByID } from "../../util/ApiUtils";
-
 export default function SearchResultsPage(props) {
   
 
@@ -16,10 +14,10 @@ export default function SearchResultsPage(props) {
     const [user, setUser] = useState(props.location.state.user);
     const [coaches, setCoaches] = useState(props.location.state.coaches)
   
-    useEffect(() => {
+    /*useEffect(() => {
       console.log("user");
       console.log(coaches);
-    }, []);
+    }, []);*/
 
     return (
       <div style={{backgroundColor: "#131F2B"}}>
