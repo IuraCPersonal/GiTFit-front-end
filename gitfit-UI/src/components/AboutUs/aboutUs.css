@@ -120,6 +120,7 @@
 }
 
 .postImagee {
+
     position: absolute;
     object-fit: cover;
     width: 20%;

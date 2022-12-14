@@ -1,0 +1,224 @@
+.clientPageWrapper {
+    display: grid;
+    column-gap: 64px;
+    background-color: #131F2B;
+    width: 1065px;
+    grid-template-columns: 3fr 4fr;
+    row-gap: 32px;
+}
+
+.clientPageWrapper.left {
+	grid-column: 1 / span 1;
+	grid-auto-rows: min-content;
+}
+
+.clientPageCalendar {
+    display: grid;
+    grid-column: 1;
+    background-color: #282D35;
+    padding: 10px;
+    border-radius:14px;
+    justify-content: center;
+    grid-auto-rows: min-content;
+}
+
+.clientPageStatsWrapper {
+    display: grid;
+    grid-row: 1;
+    grid-column: 2;
+    height: fit-content;
+    row-gap: 32px;
+}
+
+.clientPageDate {
+    color:white;
+    display: flex;
+    justify-content: left;
+    padding: 20px;
+    align-items: center;
+    background-color: #282D35;
+    border-radius: 14px;
+    font-weight: 500px;
+    font-size: 30px;
+}
+
+.clientPageStats{
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    background-color: #282D35;
+    border-radius: 14px;
+    padding: 20px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.ClientPageStatName {
+    display: flex;
+    justify-content: left;
+    grid-column: 1;
+    color: white;
+    padding: 10px;
+}
+
+.clientPageStatValue {
+    display: flex;
+    justify-content: right;
+    grid-column: 2;
+    color: #2F80ED;
+    align-items: center;
+}
+
+.clientPageLeaveNote {
+    grid-column: 1/-1;
+    color: #2F80ED;
+    cursor: pointer;
+}
+
+.noteIcon {
+    display: flex;
+    padding-left: 9px;
+    align-items: center;
+}
+
+.noteText {
+    display: flex;
+    padding-left: 9px;
+    align-self: auto;
+    font-weight: 300;
+}
+
+.clientLatestStats{
+    position: relative;
+    background-color: #282D35;
+    border-radius: 14px;
+    padding: 10px;
+    margin-top: 35px
+}
+
+.clientProfileWrapper {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 6fr;
+    padding: 10px;
+}
+
+.profilePhoto {
+    display: flex;
+    grid-column: 1;
+    grid-row: 1/-1;
+    justify-content: center;
+}
+
+.latestStatsTitleWrapper {
+    color: white;
+    padding: 20px;
+}
+
+.clientUsername {
+  color: white;
+  display: flex;
+  align-self: end;
+  font-weight: 100;
+  padding-left: 5px;
+}
+
+.notesFormInput {
+  padding-left: 5px;
+}
+
+.notesPostButton {
+  padding-left: 500px;
+}
+
+.coachCommentWrapper {
+  background-color: #282D35;
+  border-radius: 14px;
+  padding: 10px;
+}
+
+.coachComment {
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  color:white;
+}
+
+
+/*
+ CALENDAR STYLING
+*/
+
+.react-calendar {
+    background: transparent;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.125em;
+    width: 100%;
+    color: #fff;
+  }
+  .react-calendar button {
+    margin: 0;
+    border: 0;
+    outline: none;
+  }
+  .react-calendar button:enabled:hover {
+    cursor: pointer;
+  } 
+  .react-calendar__navigation {
+    display: flex;
+    height: 44px;
+    margin-bottom: 1em;
+  } 
+  .react-calendar__navigation button {
+    min-width: 44px;
+    background: none;
+    color: white;
+  } 
+  .react-calendar__navigation button:enabled:hover,
+  .react-calendar__navigation button:enabled:focus {
+    background-color: #ECF2FF;
+    color: #2F80ED;
+  }
+  .react-calendar__month-view__weekdays {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 0.75em;
+  } 
+  .react-calendar__month-view__weekdays__weekday {
+    padding: 0.5em;
+  } 
+
+  .react-calendar__month-view__days__day--neighboringMonth {
+    color: #757575;
+  } 
+  .react-calendar__year-view .react-calendar__tile,
+  .react-calendar__decade-view .react-calendar__tile,
+  .react-calendar__century-view .react-calendar__tile {
+    padding: 1em 0.5em;
+  } 
+  .react-calendar__tile {
+    max-width: 100%;
+    padding: 10px 6.6667px;
+    background: none;
+    text-align: center;
+    line-height: 16px;
+    color: white;
+  } 
+  .react-calendar__tile:enabled:hover,
+  .react-calendar__tile:enabled:focus {
+    background-color: #ECF2FF;
+    color:  #2F80ED;
+  } 
+  /*.react-calendar__tile--now {
+    background: #ffff76;
+  }/*
+  .react-calendar__tile--now:enabled:hover,
+  .react-calendar__tile--now:enabled:focus {
+    background: #ffffa9;
+  }
+*/
+
+/*
+ CALENDAR STYLING END
+*/

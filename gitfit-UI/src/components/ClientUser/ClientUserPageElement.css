@@ -1,0 +1,15 @@
+.enterStatForm {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 52px;
+    background-color: #ECF2FF;
+    border-radius: 14px;
+    color: #666666;
+    padding: 24px 100px 24px 20px;
+    height: fit-content;
+    font-size: 15px;
+}
+
+.inputFieldStat {
+   grid-column: 1/ -1;
+}
