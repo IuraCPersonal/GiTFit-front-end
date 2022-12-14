@@ -8,6 +8,7 @@ import Navbar from "../../components/Navbar/navbar";
 import Sidebar from "../../components/Sidebar/sidebar";
 import AboutUsElement from "../../components/AboutUs/aboutUs2"
 
+import { getUserDataByID } from "../../util/ApiUtils";
 
 export default function AboutUsPage(props) {
 
@@ -22,6 +23,17 @@ export default function AboutUsPage(props) {
   };
 
   const [user, setUser] = useState(props.location.state.user);
+  const [userData, setUserData] = useState("");
+  const [userId, setUserId] = useState("");
+  const [usrRole, setUserRole] = useState("");
+
+  useEffect(() => {
+    getUserDataByID(user.id).then((response) => {
+      console.log(response);
+      setUserId(response.id)
+      setUserRole(response.userRole.name)
+   })
+}, []);
 
   useEffect(() => {
     console.log(user);
@@ -33,14 +45,14 @@ export default function AboutUsPage(props) {
         <Route>
           <Navbar
             user = {user}
-            role={user.roles[0]}
-            id={user.id}
+            role={usrRole}
+            id={userId}
           />
           <Sidebar/>
         </Route>
         <AboutUsElement
-          role={user.roles[0]}
-          id={user.id}
+          role={usrRole}
+          id={userId}
         />
       </div>
     </div>

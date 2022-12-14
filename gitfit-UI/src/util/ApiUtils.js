@@ -117,7 +117,14 @@ export function answerRequest(requestId, answer){
 export function getCoachByName(name){
     return request({
         url:API_BASE_URL+`/v1/user/coach/search`,
-        method:'POST',
+        method:'GET',
         body:JSON.stringify(name)
+    })
+}
+
+export function getCoachByID(id){
+    return request({
+        url:API_BASE_URL+`/v1/user/${id}`,
+        method:'GET'
     })
 }

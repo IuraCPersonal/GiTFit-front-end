@@ -8,7 +8,7 @@ import userPhoto from "../../assets/img/userPhoto.jpg"
 
 import './ClientUserPageElement.css';
 
-import { getCoachByName } from "../../util/ApiUtils";
+import { getCoachByName, getCoachByID } from "../../util/ApiUtils";
 
 
 export default function ClientPageElement(user, role, id) {
@@ -16,7 +16,7 @@ export default function ClientPageElement(user, role, id) {
     const history = useHistory();
     const [date, setDate] = useState(new Date());
     const [coachName, setCoachName] = useState("");
-    const [coaches, setCoaches] = useState();
+    const [coaches, setCoaches] = useState("");
 
 
     const onDateChange = (newDate) => {
@@ -32,14 +32,15 @@ export default function ClientPageElement(user, role, id) {
 
     const handleCoachSearchSubmit = event => {
         event.preventDefault();
-        console.log(coachName);
         const searchRequest = {name: coachName}
-        getCoachByName(searchRequest).then(response => {
+        //GET should not have body
+       /* getCoachByName(searchRequest).then(response => {
             setCoaches(response);
             console.log(response);
-        })
-        
-        /*history.push({pathname: '/search', state: {result: coaches}});*/
+        })*/
+        getCoachByID("4").then((response) => {
+            history.push({pathname: '/search', state: {user: user, coaches: response}});
+         })
     }
     
 

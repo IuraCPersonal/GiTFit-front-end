@@ -25,7 +25,7 @@ export default function CoachUserPage(props) {
           <Route>
             <Navbar
               user = {user}
-              role={user.roles[0]}
+              role={user.role}
               id={user.id}
             />
             <Sidebar/>

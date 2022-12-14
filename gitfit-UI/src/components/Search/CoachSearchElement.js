@@ -1,4 +1,4 @@
-import React , {useState} from "react";
+import React , {useState, useEffect} from "react";
 import { BrowserRouter as Router, useHistory} from "react-router-dom";
 import { NavLink as Link } from 'react-router-dom';
 
@@ -6,13 +6,18 @@ import { NavLink as Link } from 'react-router-dom';
 import userPhoto from "../../assets/img/userPhoto.jpg"
 
 
-export default function CoachSearchElement() {
+export default function CoachSearchElement({user, coach}) {
 
 let history = useHistory();
 
 const redirectClientPage = () => {
-    history.push('/client')
+    history.push({pathname: '/coach-page', state: {user: user}});
 }
+
+useEffect(() => {
+    console.log("user");
+    console.log(user);
+  }, []);
 
   return (
 
@@ -21,33 +26,9 @@ const redirectClientPage = () => {
         <div className="clientsList">
             <div className="clientElement" onClick={redirectClientPage}>
                 <div className="clientPhoto"><img className="photo" src = {userPhoto}></img></div>
-                <div className="clientStatus">Username</div>
-                <div className="clientName">Wade Warrens</div>
-                <div className="clientLastRecord">Last Recorded Session on Dec 1 2022</div>
-            </div>
-            <div className="clientElement" onClick={redirectClientPage}>
-                <div className="clientPhoto"><img className="photo" src = {userPhoto}></img></div>
-                <div className="clientStatus">Username</div>
-                <div className="clientName">Wade Warrens</div>
-                <div className="clientLastRecord">Last Recorded Session on Dec 1 2022</div>
-            </div>
-            <div className="clientElement" onClick={redirectClientPage}>
-                <div className="clientPhoto"><img className="photo" src = {userPhoto}></img></div>
-                <div className="clientStatus">Username</div>
-                <div className="clientName">Wade Warrens</div>
-                <div className="clientLastRecord">Last Recorded Session on Dec 1 2022</div>
-            </div>
-            <div className="clientElement" onClick={redirectClientPage}>
-                <div className="clientPhoto"><img className="photo" src = {userPhoto}></img></div>
-                <div className="clientStatus">Username</div>
-                <div className="clientName">Wade Warrens</div>
-                <div className="clientLastRecord">Last Recorded Session on Dec 1 2022</div>
-            </div>
-            <div className="clientElement" onClick={redirectClientPage}>
-                <div className="clientPhoto"><img className="photo" src = {userPhoto}></img></div>
-                <div className="clientStatus">Username</div>
-                <div className="clientName">Wade Warrens</div>
-                <div className="clientLastRecord">Last Recorded Session on Dec 1 2022</div>
+                <div className="clientStatus">{coach.username}</div>
+                <div className="clientName">{coach.name} {coach.lastName}</div>
+                <div className="clientLastRecord">{coach.aboutMe}</div>
             </div>
         </div>
     </div>

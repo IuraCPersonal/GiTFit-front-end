@@ -8,9 +8,7 @@ import CoachPageElement from "../../components/CoachPage/CoachPageElement"
 
 export default function CoachPage(props) {
 
-    const [user, setUser] = useState(props.location.state.user);
-
-    
+    const [user, setUser] = useState(props.location.state.user);    
 
     const[isOpen, setIsOpen] = useState(false);
   
@@ -31,10 +29,9 @@ export default function CoachPage(props) {
           <Route>
             <Navbar
             user = {user}
-            role={user.roles[0]}
+            role={user.role}
             id={user.id}
             />
-            <Sidebar/>
           </Route>
           <div style = {{display: "flex", justifyContent: "center", paddingTop: "5%", paddingBottom: "30%"}}>
             <CoachPageElement/>

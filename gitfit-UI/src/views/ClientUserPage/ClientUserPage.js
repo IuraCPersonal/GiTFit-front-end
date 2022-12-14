@@ -25,7 +25,7 @@ export default function ClientUserPage(props) {
           <Route>
             <Navbar
               user = {user}
-              role={user.roles[0]}
+              role={user.role}
               id={user.id}
             />
             <Sidebar/>
@@ -33,7 +33,7 @@ export default function ClientUserPage(props) {
           <div style = {{display: "flex", justifyContent: "center", paddingTop: "5%", paddingBottom: "30%"}}>
             <ClientUserPageElement
               user = {user}
-              role={user.roles[0]}
+              role={user.role}
               id={user.id}
             />
           </div>
