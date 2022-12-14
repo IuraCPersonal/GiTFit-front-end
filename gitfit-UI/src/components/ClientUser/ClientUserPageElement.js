@@ -8,12 +8,16 @@ import userPhoto from "../../assets/img/userPhoto.jpg"
 
 import './ClientUserPageElement.css';
 
+import { getCoachByName } from "../../util/ApiUtils";
+
 
 export default function ClientPageElement(user, role, id) {
 
     const history = useHistory();
     const [date, setDate] = useState(new Date());
     const [coachName, setCoachName] = useState("");
+    const [coaches, setCoaches] = useState();
+
 
     const onDateChange = (newDate) => {
         setDate(newDate);
@@ -24,16 +28,20 @@ export default function ClientPageElement(user, role, id) {
         // 👇️ prevent page refresh
         event.preventDefault();
         console.log('form submitted');
-        history.push({
-            pathname:"/search",
-            state:{name:coachName}
-        });
     };
 
     const handleCoachSearchSubmit = event => {
         event.preventDefault();
         console.log(coachName);
+        const searchRequest = {name: coachName}
+        getCoachByName(searchRequest).then(response => {
+            setCoaches(response);
+            console.log(response);
+        })
+        
+        /*history.push({pathname: '/search', state: {result: coaches}});*/
     }
+    
 
     const handleInputChange = e => {
         const {id , value} = e.target;

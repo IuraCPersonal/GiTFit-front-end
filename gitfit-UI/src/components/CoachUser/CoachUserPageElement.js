@@ -38,17 +38,12 @@ export default function CoachPageElement(user, role, id) {
 
     const handleSubmit = event => {
         event.preventDefault()
-        if (aboutMe === "") {
-            setAbout(viewAbout);
-        }
-        if (ratePerHour === "") {
-            setRatePerHour(viewRatePerHour);
-        }
+
         const addDetailsRequest = {aboutMe, ratePerHour}
-        addCoachDetails(addDetailsRequest);
         console.log((addDetailsRequest));
-        console.log('form submitted');
-        window.location.reload();
+        addCoachDetails(addDetailsRequest)
+        setViewAbout(aboutMe);
+        setViewRatePerHour(ratePerHour);
     };
 
     const handleInputChange = (e) => {
@@ -87,12 +82,12 @@ export default function CoachPageElement(user, role, id) {
 
                             <div><label>
                                 <div> About Me</div>  
-                                <input style={{height: "50px"}}  type="text" value={viewAbout} onChange = {(e) => handleInputChange(e)} id="aboutMe" placeholder="Something about your activity as a coach" />
+                                <input style={{height: "50px"}}  type="text"  onChange = {(e) => handleInputChange(e)} id="aboutMe" placeholder="Something about your activity as a coach" />
                             </label></div>
 
                             <div><label>
                                 <div> Rate per hour (in dollars)</div>  
-                                <input style={{height: "50px"}} type="text" value={viewRatePerHour} onChange = {(e) => handleInputChange(e)} id="ratePerHour" placeholder="$"/>
+                                <input style={{height: "50px"}} type="text"  onChange = {(e) => handleInputChange(e)} id="ratePerHour" placeholder="$"/>
                             </label></div>
 
                              {/*<div style = {{ gridColumn: "2", gridRow: "2"}}><label>

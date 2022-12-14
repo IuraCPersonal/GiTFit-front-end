@@ -113,3 +113,11 @@ export function answerRequest(requestId, answer){
         body:JSON.stringify(answer)
     })
 }
+
+export function getCoachByName(name){
+    return request({
+        url:API_BASE_URL+`/v1/user/coach/search`,
+        method:'POST',
+        body:JSON.stringify(name)
+    })
+}

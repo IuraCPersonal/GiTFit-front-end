@@ -10,7 +10,7 @@ import {
   NavBtnLink,
 } from './navbarElements';
 
-import {getClient} from "../../util/ApiUtils";
+import {getUserDataByID} from "../../util/ApiUtils";
 
   
 const Navbar = ({toggle, user, role, id}) => {
@@ -36,6 +36,10 @@ const Navbar = ({toggle, user, role, id}) => {
       setFirstLink('/coach-page')
       setSecondLink('/my-page-user')
     }
+    getUserDataByID(id).then(response=>{
+      setClientLastName(response.lastName);
+      setClientFirstName(response.name);
+    })
   }, []);
 
   let history = useHistory();
@@ -63,7 +67,7 @@ const Navbar = ({toggle, user, role, id}) => {
             Main
           </div>
           <div style={{color: "white", cursor: "pointer", paddingTop: "30px"}} onClick={redirectSecondPage}>
-            Logged in <br/> Name Surname
+            Logged in <br/> {clientFirstName} {clientLastName}
           </div>
       
           {/* Second Nav */}
