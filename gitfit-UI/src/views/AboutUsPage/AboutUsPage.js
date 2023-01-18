@@ -1,4 +1,4 @@
-import React , {useState} from "react";
+import React , {useState, useEffect} from "react";
 import { BrowserRouter as Router, Route} from "react-router-dom";
 import './aboutUs.css';
 
@@ -8,27 +8,38 @@ import Navbar from "../../components/Navbar/navbar";
 import Sidebar from "../../components/Sidebar/sidebar";
 import AboutUsElement from "../../components/AboutUs/aboutUs2"
 
+import { getUserDataByID } from "../../util/ApiUtils";
 
-export default function AboutUsPage() {
+export default function AboutUsPage(props) {
 
-  const[isOpen, setIsOpen] = useState(false);
+  const [user, setUser] = useState(props.location.state.user);
+  const [userData, setUserData] = useState("");
+  const [userId, setUserId] = useState("");
+  const [usrRole, setUserRole] = useState("");
 
-  const toggle = () => {
-    setIsOpen(!isOpen)
-  }
-
-  const handleClick = () => {
-    console.log('button clicked');
-  };
+  useEffect(() => {
+    console.log(user.roles[0])
+    getUserDataByID(user.id).then((response) => {
+      setUserId(response.id)
+      setUserRole(response.userRole.name)
+      console.log(usrRole)
+   })
+}, []);
 
   return (
     <div>
       <div>
         <Route>
-          <Navbar/>
-          <Sidebar/>
+          <Navbar
+            user={user}
+            role={usrRole}
+            id={userId}
+          />
         </Route>
-        <AboutUsElement/>
+        <AboutUsElement
+          role={usrRole}
+          id={userId}
+        />
       </div>
     </div>
   );

@@ -1,16 +1,21 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { BrowserRouter as Router, Route} from "react-router-dom";
 
 
 import Navbar from "../../components/Navbar/navbar";
 import Sidebar from "../../components/Sidebar/sidebar";
-import ClientUserPageElement from "../../components/ClientUser/ClientUserPageElement"
+import CoachUserPageElement from "../../components/CoachUser/CoachUserPageElement"
 
-export default function ClientUserPage(props) {
+export default function CoachUserPage(props) {
 
     const[isOpen, setIsOpen] = useState(false);
     const [user, setUser] = useState(props.location.state.user);
+    const [role, setRole] = useState(props.location.state.role);
+    const [id, setId] = useState(props.location.state.id);
 
+    useEffect(() => {
+      console.log(role)
+    }, []);
   
     const toggle = () => {
       setIsOpen(!isOpen)
@@ -25,16 +30,16 @@ export default function ClientUserPage(props) {
           <Route>
             <Navbar
               user = {user}
-              role={user.role}
-              id={user.id}
+              role={role}
+              id={id}
             />
             <Sidebar/>
           </Route>
           <div style = {{display: "flex", justifyContent: "center", paddingTop: "5%", paddingBottom: "30%"}}>
-            <ClientUserPageElement
+            <CoachUserPageElement
               user = {user}
-              role={user.role}
-              id={user.id}
+              role={role}
+              id={id}
             />
           </div>
       </div>

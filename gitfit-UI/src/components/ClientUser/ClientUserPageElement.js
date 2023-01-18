@@ -8,10 +8,16 @@ import userPhoto from "../../assets/img/userPhoto.jpg"
 
 import './ClientUserPageElement.css';
 
+import { getCoachByName, getCoachByID } from "../../util/ApiUtils";
 
-export default function ClientPageElement() {
 
+export default function ClientPageElement(user, role, id) {
+
+    const history = useHistory();
     const [date, setDate] = useState(new Date());
+    const [coachName, setCoachName] = useState("");
+    const [coaches, setCoaches] = useState("");
+
 
     const onDateChange = (newDate) => {
         setDate(newDate);
@@ -24,6 +30,27 @@ export default function ClientPageElement() {
         console.log('form submitted');
     };
 
+    const handleCoachSearchSubmit = event => {
+        event.preventDefault();
+        const searchRequest = {name: coachName}
+        //GET should not have body
+       /* getCoachByName(searchRequest).then(response => {
+            setCoaches(response);
+            console.log(response);
+        })*/
+        getCoachByID("4").then((response) => {
+            history.push({pathname: '/search', state: {user: user, coaches: response}});
+         })
+    }
+    
+
+    const handleInputChange = e => {
+        const {id , value} = e.target;
+        if(id === "coachName"){
+            setCoachName(value);
+        }
+    };
+
     const current = new Date();
     const currentDate = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
     
@@ -33,6 +60,15 @@ export default function ClientPageElement() {
         <div className="clientPageWrapper">
             <div className="left">
                 <div className="clientPageCalendar"><Calendar onChange={onDateChange} value={date} /></div>
+
+                <div className="clientLatestStats"><div className="latestStatsTitleWrapper">
+                        <div style={{fontWeight: "700", fontSize: "37px"}}>Your Coach</div>
+                        <form>
+                            <input style={{height: "50px"}} type="text" value={coachName} onChange = {(e) => handleInputChange(e)} id="coachName"  placeholder="Search coach"/>
+                            <button onClick={handleCoachSearchSubmit}>Search</button>
+                        </form>
+                    </div>
+                </div>
 
                 <div className="clientLatestStats">
                     <div className="clientProfileWrapper">
