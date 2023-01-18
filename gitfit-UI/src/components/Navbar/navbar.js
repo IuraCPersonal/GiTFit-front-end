@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useLayoutEffect} from 'react';
 import {useHistory} from 'react-router-dom';
 import {
   Nav,
@@ -11,9 +11,10 @@ import {
 } from './navbarElements';
 
 import {getUserDataByID} from "../../util/ApiUtils";
+import { BiFirstAid } from 'react-icons/bi';
 
   
-const Navbar = ({id}) => {
+const Navbar = ({id, role}) => {
 
   const [clientLastName, setClientLastName] = React.useState([]);
   const [clientFirstName, setClientFirstName] = React.useState([]);
@@ -21,19 +22,21 @@ const Navbar = ({id}) => {
   const [firstText, setFirstText] = React.useState([]);
   const [firstLink, setFirstLink] = React.useState([]);
   const [secondLink, setSecondLink] = React.useState([]);
-  const [role, setUserRole] = React.useState([]);
   const [user, setUser] = React.useState([]);
+  const [userRole, setUserRole] = React.useState(role);
 
 
 
   useEffect(() => {
     getUserDataByID(id).then((response) => {
+      if (userRole != "COACH" && userRole != "CLIENT") {
+        setUserRole(response.userRole.name)
+      }
       setUser(response)
-      setUserRole(response.userRole.name)
+      //setUserRole(response.userRole.name)
       setClientLastName(response.lastName);
       setClientFirstName(response.name);
     })
-    /*console.log(id)*/
     if (role === "COACH") {
       setFirstText("Clients")
       setFirstLink('/clients')
@@ -55,8 +58,10 @@ const Navbar = ({id}) => {
     history.push({pathname: secondLink, state: {id: id}});
   }
   const redirectMainPage = () => {
-    history.push({pathname: '/about', state: {user: user}});
+    history.push({pathname: '/about', state: {user: user, role: role}});
   }
+
+  if (role === null) return null
 
   return (
     

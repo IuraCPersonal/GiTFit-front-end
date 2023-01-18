@@ -38,7 +38,7 @@ export default function SignInElement() {
       if(response.accessToken){
         localStorage.setItem("accessToken",response.accessToken);
       }
-      history.push({pathname: "/about", state: {user: response}});
+      history.push({pathname: "/about", state: {user: response, role: response.roles[0]}});
     })
   }
 
