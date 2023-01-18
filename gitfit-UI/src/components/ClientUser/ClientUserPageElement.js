@@ -11,7 +11,7 @@ import './ClientUserPageElement.css';
 import { getCoachByName, getCoachByID } from "../../util/ApiUtils";
 
 
-export default function ClientPageElement(user, role, id) {
+export default function ClientPageElement(id) {
 
     const history = useHistory();
     const [date, setDate] = useState(new Date());
@@ -39,7 +39,7 @@ export default function ClientPageElement(user, role, id) {
             console.log(response);
         })*/
         getCoachByID("4").then((response) => {
-            history.push({pathname: '/search', state: {user: user, coaches: response}});
+            history.push({pathname: '/search', state: {id: id, coaches: response}});
          })
     }
     

@@ -10,28 +10,20 @@ export default function SearchResultsPage(props) {
   
 
     const[isOpen, setIsOpen] = useState(false);
-   /* const [results, setResults] = useState(props.location.state.name.results);*/
-    const [user, setUser] = useState(props.location.state.user);
+    const [id, setId] = useState(props.location.state.id);
     const [coaches, setCoaches] = useState(props.location.state.coaches)
   
-    /*useEffect(() => {
-      console.log("user");
-      console.log(coaches);
-    }, []);*/
-
     return (
       <div style={{backgroundColor: "#131F2B"}}>
           <Route>
             <Navbar
-             user = {user}
-             role={user.role}
-             id={user.id}
+              id={props.location.state.id}
              />
           </Route>
           <div style = {{display: "flex", justifyContent: "center", paddingTop: "5%", paddingBottom: "15%"}}>
             <CoachSearchElement
-             user={user}
-             coach={coaches}
+              id={props.location.state.id}
+              coach={coaches}
              />
           </div>
       </div>

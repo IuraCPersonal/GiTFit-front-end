@@ -17,29 +17,15 @@ export default function AboutUsPage(props) {
   const [userId, setUserId] = useState("");
   const [usrRole, setUserRole] = useState("");
 
-  useEffect(() => {
-    console.log(user.roles[0])
-    getUserDataByID(user.id).then((response) => {
-      setUserId(response.id)
-      setUserRole(response.userRole.name)
-      console.log(usrRole)
-   })
-}, []);
-
   return (
     <div>
       <div>
         <Route>
           <Navbar
-            user={user}
-            role={usrRole}
-            id={userId}
+            id={props.location.state.user.id}
           />
         </Route>
-        <AboutUsElement
-          role={usrRole}
-          id={userId}
-        />
+        <AboutUsElement/>
       </div>
     </div>
   );

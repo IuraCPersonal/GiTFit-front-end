@@ -34,7 +34,6 @@ export default function SignInElement() {
       email,
       password
     }
-    console.log(loginRequest);
     login(loginRequest).then(response=>{
       if(response.accessToken){
         localStorage.setItem("accessToken",response.accessToken);
