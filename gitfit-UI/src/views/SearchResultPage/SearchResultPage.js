@@ -22,7 +22,7 @@ export default function SearchResultsPage(props) {
           <div style = {{display: "flex", justifyContent: "center", paddingTop: "5%", paddingBottom: "15%"}}>
             <CoachSearchElement
               id={props.location.state.id}
-              coach={props.location.state.coaches}
+              coaches={props.location.state.coaches}
              />
           </div>
       </div>

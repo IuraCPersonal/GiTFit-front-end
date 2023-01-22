@@ -7,7 +7,7 @@ import userPhoto from "../../assets/img/userPhoto.jpg"
 
 import './ClientUserPageElement.css';
 
-import { getCoachByName, getCoachByID} from "../../util/ApiUtils";
+import { getCoachByName, getCoachByID, getStatsByID} from "../../util/ApiUtils";
 
 
 export default function ClientPageElement(id) {
@@ -16,11 +16,16 @@ export default function ClientPageElement(id) {
     const [date, setDate] = useState(new Date());
     const [coachName, setCoachName] = useState("");
     const [coaches, setCoaches] = useState("");
+    const [stats, setStats] = useState("");
 
 
     const onDateChange = (newDate) => {
         setDate(newDate);
         console.log(newDate);
+        getStatsByID(id.id).then(response=>{
+            console.log(response)
+            console.log("THIS")
+         })
     }
 
     const handleSubmit = event => {
@@ -30,26 +35,15 @@ export default function ClientPageElement(id) {
     };
 
     const handleCoachSearchSubmit = event => {
-        /*event.preventDefault();
+        event.preventDefault();
         const searchRequest = {name: coachName}
         //GET should not have body
-       /* getCoachByName(searchRequest).then(response => {
+        getCoachByName(coachName).then(response => {
             setCoaches(response);
             console.log(response);
-        })*/
-        /*getCoachByID("4").then((response) => {
-            history.push({pathname: '/search', state: {id: id, coaches: response}});
-         })*/
-         
-         event.preventDefault();
-         const searchRequest = {
-            id: 4
-         }
-         getCoachByID("9").then(response=>{
             history.push({pathname: "/search", state: {id: id.id, coaches: response}});
-         })
+        })
     }
-    
 
     const handleInputChange = e => {
         const {id , value} = e.target;
@@ -135,12 +129,17 @@ export default function ClientPageElement(id) {
                                 <input style={{height: "50px"}}  type="text" name="statName" placeholder="Type here"/>
                             </label></div>
 
-                            <div style = {{ gridColumn: "1", gridRow: "2"}}><label>
+                            <div style = {{ gridColumn: "1/ -1"}}><label>
+                                <div> Value </div>  
+                                <input style={{height: "50px"}}  type="text" name="statValue" placeholder="a number"/>
+                            </label></div>
+
+                            <div style = {{ gridColumn: "1", gridRow: "3"}}><label>
                                 <div> Stat Unit</div>  
                                 <input style={{height: "50px"}} type="text" name="unit" placeholder="e.g. kg, reps etc."/>
                             </label></div>
 
-                            <div style = {{ gridColumn: "2", gridRow: "2"}}><label>
+                            <div style = {{ gridColumn: "2", gridRow: "3"}}><label>
                                 <div>Additional Stat Unit</div>  
                                 <input style={{height: "50px"}} type="text" name="additionalUnit" placeholder="e.g. kg, reps etc."/>
                             </label></div>

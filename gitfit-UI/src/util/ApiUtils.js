@@ -117,9 +117,8 @@ export function answerRequest(requestId, answer){
 
 export function getCoachByName(name){
     return request({
-        url:API_BASE_URL+`/v1/user/coach/search`,
+        url:API_BASE_URL+`/v1/user/coach/search?name=${name}`,
         method:'GET',
-        body:JSON.stringify(name)
     })
 }
 
@@ -127,5 +126,20 @@ export function getCoachByID(id){
     return request({
         url:API_BASE_URL+`/v1/user/${id}`,
         method:'GET'
+    })
+}
+
+export function getStatsByID(id){
+    return request({
+        url:API_BASE_URL+`/v1/statistics/${id}/all`,
+        method:'GET',
+    })
+}
+
+export function postStatsbyID(clientId, stats){
+    return request({
+        url:API_BASE_URL+`/v1/statistics/${clientId}`,
+        method:'POST',
+        body:JSON.stringify(stats)
     })
 }

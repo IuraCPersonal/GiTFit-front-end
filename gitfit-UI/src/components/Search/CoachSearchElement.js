@@ -6,7 +6,7 @@ import userPhoto from "../../assets/img/userPhoto.jpg"
 import { sendRequest, getCoachByID } from "../../util/ApiUtils";
 
 
-export default function CoachSearchElement({id, coach}) {
+export default function CoachSearchElement({id, coaches}) {
 
 let history = useHistory();
 
@@ -28,12 +28,19 @@ const handleCoachClick = (e) => {
     <div className="clientsWrapper">
         <div className="clientsHeader"><h1>Results</h1></div>
         <div className="clientsList">
-            <div className="clientElement"  id={coach.id} onClick={handleCoachClick}>
+
+        {coaches.map(coach => {
+            return (
+                <div className="clientElement"  id={coach.id} onClick={handleCoachClick}>
                 <div className="clientPhoto"><img className="photo" src = {userPhoto}></img></div>
                 <div className="clientStatus">{coach.username}</div>
                 <div className="clientName">{coach.name} {coach.lastName}</div>
                 <button style={{width: "90%"}} id={coach.id} onClick={handleClick}> Connect </button>
             </div>
+            )
+        })}
+
+            
         </div>
     </div>
   );
