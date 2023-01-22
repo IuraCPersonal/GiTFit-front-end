@@ -45,8 +45,8 @@ export default function ClientPageElement(id) {
          const searchRequest = {
             id: 4
          }
-         getCoachByID("4").then(response=>{
-                history.push({pathname: "/search", state: {id: id.id, coaches: response}});
+         getCoachByID("9").then(response=>{
+            history.push({pathname: "/search", state: {id: id.id, coaches: response}});
          })
     }
     

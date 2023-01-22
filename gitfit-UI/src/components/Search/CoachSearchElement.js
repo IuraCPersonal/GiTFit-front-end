@@ -3,7 +3,7 @@ import { BrowserRouter as Router, useHistory} from "react-router-dom";
 
 import userPhoto from "../../assets/img/userPhoto.jpg"
 
-import { sendRequest } from "../../util/ApiUtils";
+import { sendRequest, getCoachByID } from "../../util/ApiUtils";
 
 
 export default function CoachSearchElement({id, coach}) {
@@ -17,12 +17,18 @@ const handleClick = (e) => {
     })
 }
 
+const handleCoachClick = (e) => {
+    getCoachByID(e.currentTarget.id).then(response=>{
+        history.push({pathname: "/coach-page", state: {id: id, coach: response}});    
+    })
+}
+
   return (
 
     <div className="clientsWrapper">
         <div className="clientsHeader"><h1>Results</h1></div>
         <div className="clientsList">
-            <div className="clientElement"  id={coach.id}>
+            <div className="clientElement"  id={coach.id} onClick={handleCoachClick}>
                 <div className="clientPhoto"><img className="photo" src = {userPhoto}></img></div>
                 <div className="clientStatus">{coach.username}</div>
                 <div className="clientName">{coach.name} {coach.lastName}</div>
