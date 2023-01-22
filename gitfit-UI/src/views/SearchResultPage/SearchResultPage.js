@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route} from "react-router-dom";
 
 
 import Navbar from "../../components/Navbar/navbar";
-import Sidebar from "../../components/Sidebar/sidebar";
 import CoachSearchElement from "../../components/Search/CoachSearchElement"
 
 export default function SearchResultsPage(props) {
@@ -12,7 +11,7 @@ export default function SearchResultsPage(props) {
     const[isOpen, setIsOpen] = useState(false);
     const [id, setId] = useState(props.location.state.id);
     const [coaches, setCoaches] = useState(props.location.state.coaches)
-  
+
     return (
       <div style={{backgroundColor: "#131F2B"}}>
           <Route>
@@ -23,7 +22,7 @@ export default function SearchResultsPage(props) {
           <div style = {{display: "flex", justifyContent: "center", paddingTop: "5%", paddingBottom: "15%"}}>
             <CoachSearchElement
               id={props.location.state.id}
-              coach={coaches}
+              coach={props.location.state.coaches}
              />
           </div>
       </div>

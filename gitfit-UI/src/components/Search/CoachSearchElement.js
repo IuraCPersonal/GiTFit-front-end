@@ -1,14 +1,12 @@
 import React , {useState, useEffect} from "react";
 import { BrowserRouter as Router, useHistory} from "react-router-dom";
-import { NavLink as Link } from 'react-router-dom';
-
 
 import userPhoto from "../../assets/img/userPhoto.jpg"
 
 import { sendRequest } from "../../util/ApiUtils";
 
 
-export default function CoachSearchElement({user, coach}) {
+export default function CoachSearchElement({id, coach}) {
 
 let history = useHistory();
 
@@ -18,11 +16,6 @@ const handleClick = (e) => {
         console.log(response);
     })
 }
-
-/*useEffect(() => {
-    console.log("user");
-    console.log(user);
-  }, []);*/
 
   return (
 

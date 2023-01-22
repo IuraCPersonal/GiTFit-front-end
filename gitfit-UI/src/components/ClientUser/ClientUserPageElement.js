@@ -1,14 +1,13 @@
 import React , {useState} from "react";
 import Calendar from 'react-calendar'
 import { BrowserRouter as Router, useHistory} from "react-router-dom";
-import { NavLink as Link } from 'react-router-dom';
 
 import {AiFillPlusCircle} from 'react-icons/ai'
 import userPhoto from "../../assets/img/userPhoto.jpg"
 
 import './ClientUserPageElement.css';
 
-import { getCoachByName, getCoachByID } from "../../util/ApiUtils";
+import { getCoachByName, getCoachByID} from "../../util/ApiUtils";
 
 
 export default function ClientPageElement(id) {
@@ -31,15 +30,23 @@ export default function ClientPageElement(id) {
     };
 
     const handleCoachSearchSubmit = event => {
-        event.preventDefault();
+        /*event.preventDefault();
         const searchRequest = {name: coachName}
         //GET should not have body
        /* getCoachByName(searchRequest).then(response => {
             setCoaches(response);
             console.log(response);
         })*/
-        getCoachByID("4").then((response) => {
+        /*getCoachByID("4").then((response) => {
             history.push({pathname: '/search', state: {id: id, coaches: response}});
+         })*/
+         
+         event.preventDefault();
+         const searchRequest = {
+            id: 4
+         }
+         getCoachByID("4").then(response=>{
+                history.push({pathname: "/search", state: {id: id.id, coaches: response}});
          })
     }
     
@@ -65,7 +72,8 @@ export default function ClientPageElement(id) {
                         <div style={{fontWeight: "700", fontSize: "37px"}}>Your Coach</div>
                         <form>
                             <input style={{height: "50px"}} type="text" value={coachName} onChange = {(e) => handleInputChange(e)} id="coachName"  placeholder="Search coach"/>
-                            <button onClick={handleCoachSearchSubmit}>Search</button>
+                            {/*<button onClick={handleCoachSearchSubmit}>Search</button>*/}
+                            <input type="submit" value="Search" onClick={handleCoachSearchSubmit} />
                         </form>
                     </div>
                 </div>
