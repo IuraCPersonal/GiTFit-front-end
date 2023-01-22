@@ -7,7 +7,7 @@ import './ClientsElement.css';
 import userPhoto from "../../assets/img/userPhoto.jpg"
 
 
-export default function ClientsElement(user, role, id) {
+export default function ClientsElement(id) {
 
 let history = useHistory();
 

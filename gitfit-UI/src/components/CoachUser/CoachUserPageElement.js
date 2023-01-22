@@ -11,7 +11,7 @@ import './CoachUserPageElement.css';
 import { addCoachDetails, getUserDataByID } from "../../util/ApiUtils";
 
 
-export default function CoachPageElement(user, role, id) {
+export default function CoachPageElement(id) {
 
     const [date, setDate] = useState(new Date());
     const[aboutMe,setAbout] = useState("");
@@ -23,7 +23,8 @@ export default function CoachPageElement(user, role, id) {
     const[viewAddrress, setViewAddrress] = useState("");
 
     useEffect(() => {
-        getUserDataByID(user.id).then((response) => {
+        console.log(id.id)
+        getUserDataByID(id.id).then((response) => {
           setViewAbout(response.aboutMe);
           setViewAddrress(response.gymAddress);
           setViewRatePerHour(response.ratePerHour);

@@ -8,27 +8,23 @@ import ClientsElement from "../../components/Clients/ClientsElement"
 
 export default function ClientsPage(props) {
 
-  const [user, setUser] = useState(props.location.state.user);
+  const [id, setId] = useState(props.location.state.id);   
 
   useEffect(() => {
-    console.log(user);
+    console.log(id);
   }, []);
   
     return (
       <div style={{backgroundColor: "#131F2B"}}>
           <Route>
             <Navbar
-              user = {user}
-              role={user.roles[0]}
-              id={user.id}
+              id={props.location.state.id}
+              role={"COACH"}
             />
-            <Sidebar/>
           </Route>
           <div style = {{display: "flex", justifyContent: "center", paddingTop: "5%", paddingBottom: "15%"}}>
             <ClientsElement
-              user = {user}
-              role={user.roles[0]}
-              id={user.id}
+              id={props.location.state.id}
             />
           </div>
       </div>
