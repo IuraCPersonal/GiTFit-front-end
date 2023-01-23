@@ -5,14 +5,11 @@ import { BrowserRouter as Router, Route} from "react-router-dom";
 import Navbar from "../../components/Navbar/navbar";
 import Sidebar from "../../components/Sidebar/sidebar";
 import ClientsElement from "../../components/Clients/ClientsElement"
+import { getPending } from "../../util/ApiUtils";
 
 export default function ClientsPage(props) {
 
-  const [id, setId] = useState(props.location.state.id);   
-
-  useEffect(() => {
-    console.log(id);
-  }, []);
+  const [id, setId] = useState(props.location.state.id); 
   
     return (
       <div style={{backgroundColor: "#131F2B"}}>

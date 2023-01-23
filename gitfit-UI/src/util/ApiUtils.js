@@ -109,9 +109,9 @@ export function sendRequest(targetUserId){
 
 export function answerRequest(requestId, answer){
     return request({
-        url:API_BASE_URL+`/v1/user/connect/pending/${requestId}`,
+        url:API_BASE_URL+`/v1/user/connect/pending/${requestId}/?requestAnswer=${answer}`,
         method:'POST',
-        body:JSON.stringify(answer)
+       // body:JSON.stringify(answer)
     })
 }
 

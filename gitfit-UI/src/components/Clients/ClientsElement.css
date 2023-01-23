@@ -11,12 +11,27 @@
 
 .clientsHeader {
     display: flex;
-    grid-row: 1;
+    grid-row: 3;
     color: #fff;
     justify-content: left;
 }
 
 .clientsList{
+    display: grid;
+    grid-row: 4;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 126px;
+    row-gap: 46px;
+}
+
+.pendingHeader {
+    display: flex;
+    grid-row: 1;
+    color: #fff;
+    justify-content: left;
+}
+
+.pendingList{
     display: grid;
     grid-row: 2;
     grid-template-columns: 1fr 1fr;
