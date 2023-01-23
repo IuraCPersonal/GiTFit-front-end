@@ -5,22 +5,31 @@ import { NavLink as Link } from 'react-router-dom';
 import './ClientsElement.css';
 
 import userPhoto from "../../assets/img/userPhoto.jpg"
-import { getPending, answerRequest } from "../../util/ApiUtils";
+import { getPending, answerRequest, getCoachByID, getUserDataByID } from "../../util/ApiUtils";
 
 
 export default function ClientsElement(id) {
 
+    const [toggle, setToggle] = useState(true)
+    const [pending, setPending] = useState([])
+    const [clients, setClients] = useState([])
+
     let history = useHistory();
 
     const redirectClientPage = () => {
-        history.push('/client')
+        getUserDataByID('8').then((response) => {
+            console.log(response)
+            history.push({pathname: "/client", state: {id: id.id, client: response}})
+        })
     }
 
     useEffect(() => {
         getPending().then((response) => {
-            console.log(response)
             setPending(response)
-      })
+        })
+        getCoachByID(id.id).then((response) => {
+            setClients(response.clients)
+        })
     }, []);
 
     const handleAccept = event => {
@@ -42,9 +51,6 @@ export default function ClientsElement(id) {
            console.log('error made: ', error);
         });
     };
-
-    const [toggle, setToggle] = useState(true)
-    const [pending, setPending] = useState([])
 
   return (
 

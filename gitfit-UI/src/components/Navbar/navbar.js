@@ -28,6 +28,7 @@ const Navbar = ({id, role}) => {
 
 
   useEffect(() => {
+    console.log(role)
     getUserDataByID(id).then((response) => {
       if (userRole != "COACH" && userRole != "CLIENT") {
         setUserRole(response.userRole.name)

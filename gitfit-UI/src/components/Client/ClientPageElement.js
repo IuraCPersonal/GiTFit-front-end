@@ -1,14 +1,27 @@
-import React , {useState} from "react";
+import React , {useState, useEffect} from "react";
 import Calendar from 'react-calendar'
 import { BrowserRouter as Router, useHistory} from "react-router-dom";
 import { NavLink as Link } from 'react-router-dom';
 import {BiCommentEdit} from 'react-icons/bi'
 import userPhoto from "../../assets/img/userPhoto.jpg"
 
+import { getUserDataByID } from "../../util/ApiUtils";
+
 
 import './ClientPageElement.css';
 
-export default function ClientPageElement() {
+export default function ClientPageElement(id, client) {
+
+    useEffect(() => {
+        console.log("HERE")
+        console.log("id", id.id)
+        console.log("client", id.client)
+        getUserDataByID(id.id).then((response) => {
+            console.log(response)
+            setCoach(response)
+        })
+
+    }, []);
 
     const [date, setDate] = useState(new Date());
 
@@ -21,6 +34,8 @@ export default function ClientPageElement() {
     const currentDate = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
 
     const [toggle, setToggle] = useState(false)
+    const [coach, setCoach] = useState("")
+
 
     return (
         <div className="clientPageWrapper">
@@ -30,11 +45,11 @@ export default function ClientPageElement() {
                 <div className="clientLatestStats">
                     <div className="clientProfileWrapper">
                         <div className="profilePhoto"><img className="photo" src = {userPhoto}></img></div>
-                        <div className="clientUsername">wade887</div>
-                        <div className="clientName" style = {{fontWeight: 900, paddingLeft: "5px"}}>Wade Warrens</div>
+                        <div className="clientUsername">{id.client.username}</div>
+                        <div className="clientName" style = {{fontWeight: 900, paddingLeft: "5px"}}>{id.client.name} {id.client.lastName}</div>
                     </div>
                     <div className="latestStatsTitleWrapper">
-                        <div style={{fontWeight: "700", fontSize: "37px"}}>Wade's Latest Stats</div>
+                        <div style={{fontWeight: "700", fontSize: "37px"}}>{id.client.name}'s Latest Stats</div>
                         <div style={{fontWeight: "500"}}>as of {currentDate}</div>
                     </div>
                     <div className="clientPageStats">
@@ -93,24 +108,11 @@ export default function ClientPageElement() {
             <div className="coachCommentWrapper">
                 <div className="clientProfileWrapper">
                     <div className="profilePhoto"><img className="photo" src = {userPhoto}></img></div>
-                    <div className="clientUsername">wade887</div>
-                    <div className="clientName" style = {{fontWeight: 900, paddingLeft: "5px"}}>Wade Warrens</div>
+                    <div className="clientUsername">{coach.username}</div>
+                    <div className="clientName" style = {{fontWeight: 900, paddingLeft: "5px"}}>{coach.name} {coach.lastName}</div>
                 </div>
                 <div className="coachComment">
                     We’re also gonna try for a new Bench Press PR next time!!!
-                </div>
-            </div>
-            <div className="coachCommentWrapper">
-                <div className="clientProfileWrapper">
-                    <div className="profilePhoto"><img className="photo" src = {userPhoto}></img></div>
-                    <div className="clientUsername">wade887</div>
-                    <div className="clientName" style = {{fontWeight: 900, paddingLeft: "5px"}}>Wade Warrens</div>
-                </div>
-                <div className="coachComment">
-                    Great job today! Congrats on hitting that new PR!!! Still need a little 
-                    work on form though... We also need to lower our body fat, so for the 
-                    next few weeks try to limit yourself to only black rice, chicken, 
-                    legumes and raw eggs. No fats or oils of any kind.
                 </div>
             </div>
             </div>
