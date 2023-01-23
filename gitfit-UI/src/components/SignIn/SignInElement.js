@@ -45,11 +45,11 @@ export default function SignInElement() {
   return (
 
     <div>
-      <div class="signInWrapper" style={{padding: "100px 20px 170px 20px"}}>
-        <div class="signUpHeader"><h1>Sign In</h1></div>
-        <div class="signInFields">
-            <form class="signInForm">
-                <div class="inputSignIn">
+      <div className="signInWrapper" style={{padding: "100px 20px 170px 20px"}}>
+        <div className="signUpHeader"><h1>Sign In</h1></div>
+        <div className="signInFields">
+            <form className="signInForm">
+                <div className="inputSignIn">
                     <input  className="formInput" type="text" value={email} onChange = {(e) => handleInputChange(e)} id="email" placeholder="Email" />
                     <input  className="formInput" type="password" value={password} onChange = {(e) => handleInputChange(e)} id="password"  placeholder="Password" />
                 </div>

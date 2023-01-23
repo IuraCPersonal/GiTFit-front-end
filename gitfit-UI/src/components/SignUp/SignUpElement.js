@@ -70,9 +70,9 @@ export default function SignUpElement() {
   return (
 
     <div>
-      <div class="signUpWrapper">
-        <div class="signUpHeader"><h1>Sign Up</h1></div>
-        <form class="signUpForm">
+      <div className="signUpWrapper">
+        <div className="signUpHeader"><h1>Sign Up</h1></div>
+        <form className="signUpForm">
           <div className="formFirstName formField">
             <label>
               <div classname="formInputName">First Name</div>

@@ -18,6 +18,7 @@ export const request = options=>{
 
     return fetch(options.url,options).then(response=>response.json().then(json=>{
         if(response.status==401){
+            console.log("401")
             localStorage.removeItem("accessToken");}
         if(!response.ok){
             return Promise.reject(json);
@@ -129,9 +130,9 @@ export function getCoachByID(id){
     })
 }
 
-export function getStatsByID(id){
+export function getStatsByID(id, date){
     return request({
-        url:API_BASE_URL+`/v1/statistics/${id}/all`,
+        url:API_BASE_URL+`/v1/statistics/${id}?date=${date}`,
         method:'GET',
     })
 }

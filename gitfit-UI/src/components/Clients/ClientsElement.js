@@ -27,10 +27,20 @@ export default function ClientsElement(id) {
         // 👇️ prevent page refresh
         //event.preventDefault();
         console.log('form submitted');
-       /* answerRequest(event.currentTarget.id, 'ACCEPT').then(
-            console.log('ok'),
-            history.push({pathname: '/clients', state: {id: id.id}})
-        )*/
+        const clientId = event.currentTarget.id
+        answerRequest(clientId, 'ACCEPT').then(response=>{
+            if (!response.ok){throw new Error ('Bad Response');} 
+            else { return response.json()};
+        })
+        .then(data => { 
+            // process data here or pass to processing function;   
+            console.log("AAA") 
+            console.log(data)
+        })
+        .catch(error => {
+           // if in a loop can also log which url failed;
+           console.log('error made: ', error);
+        });
     };
 
     const [toggle, setToggle] = useState(true)
@@ -43,7 +53,7 @@ export default function ClientsElement(id) {
         {toggle && (<div className="pendingList">
         {pending.reverse().map(pendingRequest => {
             return (
-            <div className="clientElement">
+            <div className="clientElement" key={pendingRequest.id}>
                 <div className="clientPhoto"><img className="photo" src = {userPhoto}></img></div>
                 <div className="clientStatus">Trainee</div>
                 <div className="clientName">{pendingRequest.sourceUser.name} {pendingRequest.sourceUser.lastName}</div>
