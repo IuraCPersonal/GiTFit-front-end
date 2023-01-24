@@ -1,7 +1,8 @@
-import React , {useState} from "react";
+import React , {useState, useEffect} from "react";
 import Calendar from 'react-calendar'
 import { BrowserRouter as Router, useHistory} from "react-router-dom";
 import { NavLink as Link } from 'react-router-dom';
+import dayjs from 'dayjs';
 
 import userPhoto from "../../assets/img/userPhoto.jpg"
 
@@ -11,16 +12,33 @@ import './CoachPageElement.css';
 
 export default function CoachPageElement() {
 
-    const [date, setDate] = useState(new Date());
+    const current = new Date();
+    const currentDate = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
+    const [oldDate, setDate] = useState(new Date());
+    const [date, setNewFormatDate] = useState(currentDate);
+    const times = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+    const [toggle, setToggle] = useState(false)
+
+
+    useEffect(() => {
+        console.log(date)
+        console.log(times)
+    }, []);
 
     const onDateChange = (newDate) => {
         setDate(newDate);
         console.log(newDate);
+        setNewFormatDate(dayjs(newDate).format('YYYY-MM-DD'))
+        console.log(dayjs(newDate).format('YYYY-MM-DD'))
     }
 
-    const current = new Date();
-    const currentDate = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
-
+    const handleSchedule = event => {
+        //Add get Coach by ID!
+        const scheduleHour = event.currentTarget.id
+        if (window.confirm(`Are you sure you wish to schedule a session with trainer name on ${date} at ${scheduleHour}:00?`)) {
+            console.log("scheduled", date, scheduleHour)
+        } 
+    };
 
     return(
 
@@ -34,18 +52,21 @@ export default function CoachPageElement() {
                 </div>
 
                 <div className="coachPersonalInfo">Schedule a Session With Ronald</div>
-                <div className="clientPageCalendar"><Calendar onChange={onDateChange} value={date} /></div>
+                <div className="clientPageCalendar"><Calendar onChange={onDateChange} value={oldDate} /></div>
 
             </div>
 
-            <div className="CoachUserPageRight">
-                <div className="coachPageAvailability">Availability</div>
-                <div className="availabilityList">
-                    <div className="availabilityDate">22 dec 2022, 10:00 AM</div>
-                    <div className="availabilityDate">22 dec 2022, 10:00 AM</div>
-                    <div className="availabilityDate">22 dec 2022, 10:00 AM</div>
+                <div className="CoachUserPageRight">
+                    <div className="coachPageAvailability">Availability {date}</div>
+                {times.map((time) => {
+                    return (
+                    <div className="availabilityList" key={time}>
+                        <div className="availabilityDate" id={time} onClick={handleSchedule}>{date}, {time}:00</div>
+                    </div>
+                   );
+                   
+                })}
                 </div>
-            </div>
         </div>
     );
 }

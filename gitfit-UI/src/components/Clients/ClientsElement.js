@@ -37,6 +37,7 @@ export default function ClientsElement(id) {
         //event.preventDefault();
         console.log('form submitted');
         const clientId = event.currentTarget.id
+        console.log(clientId)
         answerRequest(clientId, 'ACCEPT').then(response=>{
             if (!response.ok){throw new Error ('Bad Response');} 
             else { return response.json()};
