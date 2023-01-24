@@ -144,3 +144,11 @@ export function postStatsbyID(clientId, stats){
         body:JSON.stringify(stats)
     })
 }
+
+export function postReviewbyID(clientId, reviewData){
+    return request({
+        url:API_BASE_URL+`/v1/statistics/${clientId}/review`,
+        method:'POST',
+        body:JSON.stringify(reviewData)
+    })
+}

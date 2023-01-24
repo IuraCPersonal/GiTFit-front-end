@@ -6,7 +6,7 @@ import {BiCommentEdit} from 'react-icons/bi'
 import userPhoto from "../../assets/img/userPhoto.jpg"
 import dayjs from 'dayjs'
 
-import { getUserDataByID, getStatsByID } from "../../util/ApiUtils";
+import { getUserDataByID, getStatsByID, postReviewbyID } from "../../util/ApiUtils";
 
 
 import './ClientPageElement.css';
@@ -20,7 +20,9 @@ export default function ClientPageElement(id, client) {
     const [toggle, setToggle] = useState(false)
     const [coach, setCoach] = useState("")
     const [stats, setStats] = useState("")
-
+    const [suggestions, setSuggestions] = useState("")
+    const [suggestion, setSuggestion] = useState("")
+    const [suggestionExists, setSuggestionExists] = useState(false)
 
     useEffect(() => {
         console.log("HERE")
@@ -41,16 +43,46 @@ export default function ClientPageElement(id, client) {
 
         getStatsByID("4", dayjs(newDate).format('YYYY-MM-DD')).then(response=>{
             setStats(response)
+            if (response.suggestions.length === 1) {
+                setSuggestions(response.suggestions[0])
+                setSuggestionExists(true)
+            } else {
+                setSuggestions("")
+                setSuggestionExists(false)
+            }
+            //console.log("sug", suggestions[0])
+            //if(response.suggestions) setSuggestions(response.suggestions[0])
             //setSugestions(response.suggestions)
-            console.log("here", response)
-            console.log(stats)
             //if (!response.ok){throw new Error ('Bad Response');} 
             //else { return response.json()};
         }).catch(error => {
+            setStats("")
             // if in a loop can also log which url failed;
             console.log('error made: ', error);
          });
     }
+
+    const handleSuggestionChange = e => {
+        const {id, value} = e.target;
+        if(id === "suggestion"){
+            setSuggestion(value);
+        }
+    };
+
+    const handleSubmit = event => {
+        const coachId = id.id
+        const postReviewRequest = {
+            date,
+            coachId,
+            suggestion
+        }
+        //event.preventDefault();
+        console.log(postReviewRequest);
+        setToggle(!toggle)
+        postReviewbyID("4", postReviewRequest).then(response => {
+            console.log("done")
+        })
+    };
 
 
     return (
@@ -90,10 +122,10 @@ export default function ClientPageElement(id, client) {
 
                     <div>
                     {toggle && (
-                        <form>
+                        <form onSubmit={handleSubmit}>
                           <div className="notesFormInput">
                             <label>
-                                <input type="text" name="note" style = {{height: "50px"}}/>
+                                <input type="text" name="note" value={suggestion} id='suggestion' onChange = {(e) => handleSuggestionChange(e)} style = {{height: "50px"}}/>
                             </label>
                           </div>
                           <div>
@@ -104,16 +136,19 @@ export default function ClientPageElement(id, client) {
                     </div>
                 </div>
             </div>
-            <div className="coachCommentWrapper">
-                <div className="clientProfileWrapper">
-                    <div className="profilePhoto"><img className="photo" src = {userPhoto}></img></div>
-                    <div className="clientUsername">{coach.username}</div>
-                    <div className="clientName" style = {{fontWeight: 900, paddingLeft: "5px"}}>{coach.name} {coach.lastName}</div>
+
+            {suggestionExists && (
+                <div className="coachCommentWrapper">
+                    <div className="clientProfileWrapper">
+                        <div className="profilePhoto"><img className="photo" src = {userPhoto}></img></div>
+                        <div className="clientUsername">{coach.username}</div>
+                        <div className="clientName" style = {{fontWeight: 900, paddingLeft: "5px"}}>{suggestions.coachName}</div>
+                    </div>
+                    <div className="coachComment">
+                        {suggestions.suggestion}
+                    </div>
                 </div>
-                <div className="coachComment">
-                    We’re also gonna try for a new Bench Press PR next time!!!
-                </div>
-            </div>
+            )}
             </div>
         </div>
     );
