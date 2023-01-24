@@ -19,7 +19,8 @@ const handleClick = (e) => {
 
 const handleCoachClick = (e) => {
     getCoachByID(e.currentTarget.id).then(response=>{
-        history.push({pathname: "/coach-page", state: {id: id, coach: response}});    
+        console.log(response)
+        history.push({pathname: "/about-coach", state: {id: id, coach: response}});    
     })
 }
 
@@ -31,10 +32,10 @@ const handleCoachClick = (e) => {
 
         {coaches.map(coach => {
             return (
-                <div className="clientElement"  id={coach.id} onClick={handleCoachClick}>
-                <div className="clientPhoto"><img className="photo" src = {userPhoto}></img></div>
-                <div className="clientStatus">{coach.username}</div>
-                <div className="clientName">{coach.name} {coach.lastName}</div>
+                <div className="clientElement"  id={coach.id}>
+                  <div className="clientPhoto"><img className="photo" src = {userPhoto}></img></div>
+                  <div className="clientStatus" onClick={handleCoachClick}>{coach.username}</div>
+                  <div className="clientName" onClick={handleCoachClick}>{coach.name} {coach.lastName}</div>
                 <button style={{width: "90%"}} id={coach.id} onClick={handleClick}> Connect </button>
             </div>
             )

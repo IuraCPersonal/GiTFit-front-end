@@ -5,7 +5,7 @@ import { NavLink as Link } from 'react-router-dom';
 import './ClientsElement.css';
 
 import userPhoto from "../../assets/img/userPhoto.jpg"
-import { getPending, answerRequest, getCoachByID, getUserDataByID } from "../../util/ApiUtils";
+import { getPending, answerRequest, getCoachByID, getUserDataByID, getCoach, getClientByID } from "../../util/ApiUtils";
 
 
 export default function ClientsElement(id) {
@@ -20,14 +20,20 @@ export default function ClientsElement(id) {
         getPending().then((response) => {
             setPending(response)
         })
-        getCoachByID(id.id).then((response) => {
-            setClients(response.clients)
+        getCoachByID(id.id).then((resp) => {
+            console.log("clients", resp)
+            setClients(resp.clients)
         })
+
+        getClientByID('4').then((response) => {
+            console.log('4th client',response)
+        })
+
     }, []);
 
     const redirectClientPage = () => {
-        getUserDataByID('4').then((response) => {
-            console.log(response)
+        getClientByID('4').then((response) => {
+            console.log('4th client',response)
             history.push({pathname: "/client", state: {id: id.id, client: response}})
         })
     }

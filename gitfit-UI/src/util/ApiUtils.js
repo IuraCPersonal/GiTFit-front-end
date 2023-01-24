@@ -53,6 +53,13 @@ export function getClient(){
     })
 }
 
+export function getCoach(){
+    return request({
+        url:API_BASE_URL+'/v1/user/coach',
+        method:'GET',
+    })
+}
+
 export function getClientByID(id){
     return request({
         url:API_BASE_URL+`/v1/client/${id}`,
@@ -125,7 +132,7 @@ export function getCoachByName(name){
 
 export function getCoachByID(id){
     return request({
-        url:API_BASE_URL+`/v1/user/${id}`,
+        url:API_BASE_URL+`/v1/user/coach/${id}`,
         method:'GET'
     })
 }

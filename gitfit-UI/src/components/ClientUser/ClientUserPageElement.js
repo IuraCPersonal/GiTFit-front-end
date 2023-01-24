@@ -27,7 +27,9 @@ export default function ClientPageElement(id) {
     const current = new Date();
     const currentDate = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
     const [toggle, setToggle] = useState(false)
-    const [suggestions, setSugestions] = useState([]);
+    const [suggestions, setSuggestions] = useState([]);
+    const [suggestionExists, setSuggestionExists] = useState(false)
+
 
 
     const onDateChange = (newDate) => {
@@ -36,9 +38,14 @@ export default function ClientPageElement(id) {
 
         getStatsByID(id.id, dayjs(newDate).format('YYYY-MM-DD')).then(response=>{
             setStats(response)
-            setSugestions(response.suggestions)
-            console.log("here", response)
             console.log(stats)
+            if (response.suggestions.length === 1) {
+                setSuggestions(response.suggestions[0])
+                setSuggestionExists(true)
+            } else {
+                setSuggestions("")
+                setSuggestionExists(false)
+            }
             //if (!response.ok){throw new Error ('Bad Response');} 
             //else { return response.json()};
         })
@@ -47,7 +54,7 @@ export default function ClientPageElement(id) {
         })
         .catch(error => {
            // if in a loop can also log which url failed;
-           setSugestions([])
+           setSuggestions([])
            setStats("")
            console.log('error made: ', error);
         });
@@ -172,34 +179,19 @@ export default function ClientPageElement(id) {
                     </div>
                 </div>
             </div>
-            {suggestions.map(suggestion => {
-            return (
-                <>
+
+            {suggestionExists && (
                 <div className="coachCommentWrapper">
                     <div className="clientProfileWrapper">
                         <div className="profilePhoto"><img className="photo" src = {userPhoto}></img></div>
-                        <div className="clientUsername">wade887</div>
-                        <div className="clientName" style = {{fontWeight: 900, paddingLeft: "5px"}}>Wade Warrens</div>
+                        <div className="clientUsername">{suggestions.coachName}</div>
+                        <div className="clientName" style = {{fontWeight: 900, paddingLeft: "5px"}}>{suggestions.coachName}</div>
                     </div>
                     <div className="coachComment">
-                        Suggestion
+                        {suggestions.suggestion}
                     </div>
                 </div>
-                </>)
-            })}
-            {/*<div className="coachCommentWrapper">
-                <div className="clientProfileWrapper">
-                    <div className="profilePhoto"><img className="photo" src = {userPhoto}></img></div>
-                    <div className="clientUsername">wade887</div>
-                    <div className="clientName" style = {{fontWeight: 900, paddingLeft: "5px"}}>Wade Warrens</div>
-                </div>
-                <div className="coachComment">
-                    Great job today! Congrats on hitting that new PR!!! Still need a little 
-                    work on form though... We also need to lower our body fat, so for the 
-                    next few weeks try to limit yourself to only black rice, chicken, 
-                    legumes and raw eggs. No fats or oils of any kind.
-                </div>
-            </div>*/}
+            )}
             </div>
         </div>
     );

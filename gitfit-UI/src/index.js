@@ -14,6 +14,7 @@ import ClientUserPage from './views/ClientUserPage/ClientUserPage.js';
 import CoachUserPage from './views/CoachUserPage/CoachUserPage.js';
 import CoachPage from './views/CoachPage/CoachPage.js'
 import SearchResultsPage from './views/SearchResultPage/SearchResultPage.js'
+import AboutCoachPage from './views/AboutCoach/AboutCoachPage.js';
 
 
 var hist = createBrowserHistory();
@@ -31,6 +32,7 @@ root.render(
       <Route path='/my-page-coach' component={CoachUserPage}/>
       <Route path='/search' component={SearchResultsPage}/>
       <Route path='/client' component={ClientPage}/>
+      <Route path='/about-coach' component={AboutCoachPage}/>
       <Route path="/" component={SignInPage} />
     </Switch>
   </Router>,
