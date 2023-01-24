@@ -27,24 +27,28 @@ export default function ClientPageElement(id) {
     const current = new Date();
     const currentDate = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
     const [toggle, setToggle] = useState(false)
+    const [suggestions, setSugestions] = useState([]);
 
 
     const onDateChange = (newDate) => {
         setDate(newDate);
-        console.log(newDate);
         setNewFormatDate(dayjs(newDate).format('YYYY-MM-DD'))
-        console.log(dayjs(newDate).format('YYYY-MM-DD'))
 
         getStatsByID(id.id, dayjs(newDate).format('YYYY-MM-DD')).then(response=>{
-            if (!response.ok){throw new Error ('Bad Response');} 
-            else { return response.json()};
+            setStats(response)
+            setSugestions(response.suggestions)
+            console.log("here", response)
+            console.log(stats)
+            //if (!response.ok){throw new Error ('Bad Response');} 
+            //else { return response.json()};
         })
         .then(data => { 
             // process data here or pass to processing function;    
-            console.log(data)
         })
         .catch(error => {
            // if in a loop can also log which url failed;
+           setSugestions([])
+           setStats("")
            console.log('error made: ', error);
         });
     }
@@ -110,21 +114,21 @@ export default function ClientPageElement(id) {
                     </div>
                 </div>
             </div>
-            
             <div className="clientPageStatsWrapper">
                 <div className="clientPageDate">{dateOld.toDateString()}</div>
+
                 <div className="clientPageStats">
                     <div className="ClientPageStatName">Weight</div>
-                    <div className="clientPageStatValue">100 kg</div>
+                    <div className="clientPageStatValue">{stats.weight}</div>
 
                     <div className="ClientPageStatName">Height</div>
-                    <div className="clientPageStatValue">11 %</div>
+                    <div className="clientPageStatValue">{stats.height}</div>
 
                     <div className="ClientPageStatName">Fat Ratio</div>
-                    <div className="clientPageStatValue">90 kg / 1 rep</div>
+                    <div className="clientPageStatValue">{stats.fatRatio}</div>
 
                     <div className="ClientPageStatName">Diet</div>
-                    <div className="clientPageStatValue">90 kg / 1 rep</div>
+                    <div className="clientPageStatValue">{stats.diet}</div>
 
                     <div className="clientPageLeaveNote">
                         <div  onClick={() => setToggle(!toggle)}>
@@ -168,17 +172,22 @@ export default function ClientPageElement(id) {
                     </div>
                 </div>
             </div>
-            <div className="coachCommentWrapper">
-                <div className="clientProfileWrapper">
-                    <div className="profilePhoto"><img className="photo" src = {userPhoto}></img></div>
-                    <div className="clientUsername">wade887</div>
-                    <div className="clientName" style = {{fontWeight: 900, paddingLeft: "5px"}}>Wade Warrens</div>
+            {suggestions.map(suggestion => {
+            return (
+                <>
+                <div className="coachCommentWrapper">
+                    <div className="clientProfileWrapper">
+                        <div className="profilePhoto"><img className="photo" src = {userPhoto}></img></div>
+                        <div className="clientUsername">wade887</div>
+                        <div className="clientName" style = {{fontWeight: 900, paddingLeft: "5px"}}>Wade Warrens</div>
+                    </div>
+                    <div className="coachComment">
+                        Suggestion
+                    </div>
                 </div>
-                <div className="coachComment">
-                    We’re also gonna try for a new Bench Press PR next time!!!
-                </div>
-            </div>
-            <div className="coachCommentWrapper">
+                </>)
+            })}
+            {/*<div className="coachCommentWrapper">
                 <div className="clientProfileWrapper">
                     <div className="profilePhoto"><img className="photo" src = {userPhoto}></img></div>
                     <div className="clientUsername">wade887</div>
@@ -190,7 +199,7 @@ export default function ClientPageElement(id) {
                     next few weeks try to limit yourself to only black rice, chicken, 
                     legumes and raw eggs. No fats or oils of any kind.
                 </div>
-            </div>
+            </div>*/}
             </div>
         </div>
     );
