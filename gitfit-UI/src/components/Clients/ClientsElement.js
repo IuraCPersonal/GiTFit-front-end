@@ -54,6 +54,27 @@ export default function ClientsElement(id) {
         });
     };
 
+    const handleDecline = event => {
+        // 👇️ prevent page refresh
+        //event.preventDefault();
+        console.log('form submitted');
+        const clientId = event.currentTarget.id
+        console.log(clientId)
+        answerRequest(clientId, 'DECLINE').then(response=>{
+            if (!response.ok){throw new Error ('Bad Response');} 
+            else { return response.json()};
+        })
+        .then(data => { 
+            // process data here or pass to processing function;   
+            console.log("AAA") 
+            console.log(data)
+        })
+        .catch(error => {
+           // if in a loop can also log which url failed;
+           console.log('error made: ', error);
+        });
+    };
+
   return (
 
     <div className="clientsWrapper">
@@ -66,6 +87,7 @@ export default function ClientsElement(id) {
                 <div className="clientStatus">Trainee</div>
                 <div className="clientName">{pendingRequest.sourceUser.name} {pendingRequest.sourceUser.lastName}</div>
                 <input style={{width: "90%"}} id={pendingRequest.id} type="submit" value="Accept" onClick={handleAccept} />
+                <input style={{width: "45%"}} id={pendingRequest.id} type="submit" value="Decline" onClick={handleDecline} />
                 {/*<button style={{width: "90%"}} id={pendingRequest.id} onClick={handleAccept}> Accept </button>*/}
             </div>
             )})}

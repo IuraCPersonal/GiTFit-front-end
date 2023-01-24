@@ -3,24 +3,26 @@ import Calendar from 'react-calendar'
 import { BrowserRouter as Router, useHistory} from "react-router-dom";
 import { NavLink as Link } from 'react-router-dom';
 import dayjs from 'dayjs';
+import moment from 'moment'
 
 import userPhoto from "../../assets/img/userPhoto.jpg"
 
 
 import './CoachPageElement.css';
-import { getClientByID, getCoachByID, sessionSchedule} from "../../util/ApiUtils";
+import { getClientByID, getCoachByID, sessionSchedule, addBillingDetails} from "../../util/ApiUtils";
 
 
 export default function CoachPageElement(id) {
 
     const current = new Date();
     const currentDate = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
+    const times = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
     const [oldDate, setDate] = useState(new Date());
     const [date, setNewFormatDate] = useState(currentDate);
-    const times = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
     const [toggle, setToggle] = useState(false)
     const [coach, setCoach] = useState("")
     const [isCoach, setIsCoach] = useState(false)
+    const [coachSchedule, setCoachSchedule] = useState([])
 
 
     useEffect(() => {
@@ -40,8 +42,20 @@ export default function CoachPageElement(id) {
 
                 getCoachByID(response.coaches[0].id).then((resp) => {
                     console.log(resp)
+                    setCoachSchedule(response.scheduledSessions)
+                    console.log(coachSchedule)
                 })
             }
+        })
+        const billingRequest = {
+            town: "Chisinau",
+            street: "Cahul",
+            countryCode: "MD",
+            iban: "MD24 AG00 0225 1000 1310 4168",
+            postCode: "MD-2005"
+        }
+        addBillingDetails(billingRequest).then((resp) => {
+            console.log(resp)
         })
 
     }, []);
@@ -62,12 +76,13 @@ export default function CoachPageElement(id) {
             const hours = 1
             const scheduleRequest = {
                 coachId,
-                date: `${date}T${scheduleHour}:00:00.411Z`,
+                date: `${date} ${scheduleHour}:00`,
+                //date: `${date} ${scheduleHour}:00:00.411Z`,
                 hours
             }
-            /*sessionSchedule(scheduleRequest).then((resp) => {
+            sessionSchedule(scheduleRequest).then((resp) => {
                 console.log(resp)
-            })*/
+            })
             console.log(scheduleRequest)
         } 
     };

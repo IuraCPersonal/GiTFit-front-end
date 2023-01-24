@@ -78,9 +78,8 @@ export function addCoachDetails(coachDetails){
 
 export function getCoachSchedule(date){
     return request({
-        url:API_BASE_URL+`/v1/user/coach/schedule`,
+        url:API_BASE_URL+`/v1/user/coach/schedule/?date=${date}`,
         method:'GET',
-        body:JSON.stringify(date)
     })
 }
 
@@ -89,6 +88,14 @@ export function sessionSchedule(sessionData){
         url:API_BASE_URL+`/v1/user/coach/schedule`,
         method:'POST',
         body:JSON.stringify(sessionData)
+    })
+}
+
+export function addBillingDetails(billingData){
+    return request({
+        url:API_BASE_URL+`/v1/user/billing`,
+        method:'POST',
+        body:JSON.stringify(billingData)
     })
 }
 

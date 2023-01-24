@@ -3,8 +3,10 @@ import Calendar from 'react-calendar'
 import { NavLink as Link } from 'react-router-dom';
 import userPhoto from "../../assets/img/userPhoto.jpg"
 import './CoachUserPageElement.css';
-import { addCoachDetails, getCoachByID, getUserDataByID } from "../../util/ApiUtils";
+import { addCoachDetails, getCoachByID, getUserDataByID, getCoachSchedule } from "../../util/ApiUtils";
 import dayjs from 'dayjs'
+import moment from 'moment'
+
 
 
 export default function CoachPageElement(id) {
@@ -20,6 +22,7 @@ export default function CoachPageElement(id) {
     const currentDate = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
     const [oldDate, setDate] = useState(new Date());
     const [date, setNewFormatDate] = useState(currentDate);
+    const [schedule, setSchedule] = useState([]);
 
     useEffect(() => {
         console.log(date)
@@ -28,6 +31,8 @@ export default function CoachPageElement(id) {
           setViewAbout(response.aboutMe);
           setViewAddrress(response.gymAddress);
           setViewRatePerHour(response.ratePerHour);
+          setSchedule(response.scheduledSessions)
+          console.log(response.scheduledSessions)
        })
     }, []);
 
@@ -93,23 +98,27 @@ export default function CoachPageElement(id) {
                     )}
                 </div>
                 <div className="clientPageStatsWrapper" style={{marginTop: "20px"}}>
-                <div className="clientPageCalendar"><Calendar onChange={onDateChange} value={oldDate} /></div>
+               {/* <div className="clientPageCalendar"><Calendar onChange={onDateChange} value={oldDate} /></div> */}
                 </div>
 
             </div>
             
             <div className="clientPageStatsWrapper">
-                <div className="clientPageDate">{date}</div>
-                <div className="coachPersonalSessions">
+                {/*<div className="clientPageDate">{date}</div>*/}
+                {schedule.map((ses) => {
+                    return (<div className="coachPersonalSessions">
+                
                     <div>
-                    <Link to='/client'><div className="clientElement" style={{padding: "10px"}}>
+                    <div className="clientElement" style={{padding: "10px"}} >
                             <div className="clientPhoto"><img className="photo" src = {userPhoto}></img></div>
-                            <div className="clientStatus">Username</div>
-                            <div className="clientName">Wade Warrens</div>
-                            <div className="clientLastRecord" style={{color:"#2F80ED"}}>Session at 12:00</div>
-                        </div></Link>
+                            <div className="clientStatus">{ses.client.email}</div>
+                            <div className="clientName">{ses.client.name} {ses.client.lastName}</div>
+                            <div className="clientLastRecord" style={{color:"#2F80ED"}}>Session on {moment(ses.dateAndTime).format('YYYY-MM-DD, HH:00')}</div>
+                        </div>
                     </div>
-                </div>
+                   
+                </div> );
+                })}
             </div>
         </div>
     );
