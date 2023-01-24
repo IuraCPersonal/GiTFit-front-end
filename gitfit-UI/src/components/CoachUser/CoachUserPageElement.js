@@ -2,27 +2,30 @@ import React , {useState, useEffect} from "react";
 import Calendar from 'react-calendar'
 import { BrowserRouter as Router, useHistory} from "react-router-dom";
 import { NavLink as Link } from 'react-router-dom';
-
 import {AiFillPlusCircle} from 'react-icons/ai'
 import userPhoto from "../../assets/img/userPhoto.jpg"
-
 import './CoachUserPageElement.css';
-
 import { addCoachDetails, getUserDataByID } from "../../util/ApiUtils";
+import dayjs from 'dayjs'
 
 
 export default function CoachPageElement(id) {
 
-    const [date, setDate] = useState(new Date());
+    //const [date, setDate] = useState(new Date());
     const[aboutMe,setAbout] = useState("");
     const[gymAddress,setAddress] = useState("");
     const[ratePerHour,setRatePerHour] = useState("");
-
     const[viewAbout, setViewAbout] = useState("");
     const[viewRatePerHour, setViewRatePerHour] = useState("");
     const[viewAddrress, setViewAddrress] = useState("");
 
+    const current = new Date();
+    const currentDate = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
+    const [oldDate, setDate] = useState(new Date());
+    const [date, setNewFormatDate] = useState(currentDate);
+
     useEffect(() => {
+        console.log(date)
         console.log(id.id)
         getUserDataByID(id.id).then((response) => {
           setViewAbout(response.aboutMe);
@@ -31,9 +34,15 @@ export default function CoachPageElement(id) {
        })
     }, []);
 
+    /*const onDateChange = (newDate) => {
+        setDate(newDate);
+        console.log(newDate);
+    }*/
     const onDateChange = (newDate) => {
         setDate(newDate);
         console.log(newDate);
+        setNewFormatDate(dayjs(newDate).format('YYYY-MM-DD'))
+        console.log(dayjs(newDate).format('YYYY-MM-DD'))
     }
 
     const handleSubmit = event => {
@@ -58,8 +67,8 @@ export default function CoachPageElement(id) {
         }
     }
 
-    const current = new Date();
-    const currentDate = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
+    //const current = new Date();
+    //const currentDate = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
     
     const [toggle, setToggle] = useState(false)
 
@@ -103,19 +112,21 @@ export default function CoachPageElement(id) {
                         </form>       
                     )}
                 </div>
+                <div className="clientPageStatsWrapper" style={{marginTop: "20px"}}>
+                <div className="clientPageCalendar"><Calendar onChange={onDateChange} value={oldDate} /></div>
+                </div>
 
             </div>
             
             <div className="clientPageStatsWrapper">
-                <div className="clientPageCalendar"><Calendar onChange={onDateChange} value={date} /></div>
-                <div className="clientPageDate">{date.toDateString()}</div>
+                <div className="clientPageDate">{date}</div>
                 <div className="coachPersonalSessions">
                     <div>
                     <Link to='/client'><div className="clientElement" style={{padding: "10px"}}>
                             <div className="clientPhoto"><img className="photo" src = {userPhoto}></img></div>
                             <div className="clientStatus">Username</div>
                             <div className="clientName">Wade Warrens</div>
-                            <div className="clientLastRecord" style={{color:"#2F80ED"}}>Session at 12:30 AM. <br/>Duration: 60 min</div>
+                            <div className="clientLastRecord" style={{color:"#2F80ED"}}>Session at 12:00</div>
                         </div></Link>
                     </div>
                 </div>
