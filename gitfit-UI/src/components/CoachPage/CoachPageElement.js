@@ -8,7 +8,7 @@ import userPhoto from "../../assets/img/userPhoto.jpg"
 
 
 import './CoachPageElement.css';
-import { getClientByID, getCoachByID } from "../../util/ApiUtils";
+import { getClientByID, getCoachByID, sessionSchedule} from "../../util/ApiUtils";
 
 
 export default function CoachPageElement(id) {
@@ -56,8 +56,19 @@ export default function CoachPageElement(id) {
     const handleSchedule = event => {
         //Add get Coach by ID!
         const scheduleHour = event.currentTarget.id
-        if (window.confirm(`Are you sure you wish to schedule a session with trainer name on ${date} at ${scheduleHour}:00?`)) {
-            console.log("scheduled", date, scheduleHour)
+        if (window.confirm(`Are you sure you wish to schedule a session with ${coach.name} ${coach.lastName} on ${date} at ${scheduleHour}:00?`)) {
+           // const date = `${date}${scheduleHour}:00:00.411Z`
+            const coachId = coach.id
+            const hours = 1
+            const scheduleRequest = {
+                coachId,
+                date: `${date}T${scheduleHour}:00:00.411Z`,
+                hours
+            }
+            /*sessionSchedule(scheduleRequest).then((resp) => {
+                console.log(resp)
+            })*/
+            console.log(scheduleRequest)
         } 
     };
 

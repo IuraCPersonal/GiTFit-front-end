@@ -7,6 +7,10 @@ import CoachUserPageElement from "../../components/CoachUser/CoachUserPageElemen
 
 export default function CoachUserPage(props) {
 
+  useEffect(() => {
+    console.log(props.location.state.id)
+}, []);
+
     const [id, setId] = useState(props.location.state.id);   
   
     return (

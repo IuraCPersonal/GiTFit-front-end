@@ -41,7 +41,7 @@ export default function ClientPageElement(id, client) {
         setNewFormatDate(dayjs(newDate).format('YYYY-MM-DD'))
         console.log(dayjs(newDate).format('YYYY-MM-DD'))
 
-        getStatsByID("4", dayjs(newDate).format('YYYY-MM-DD')).then(response=>{
+        getStatsByID(id.client.id, dayjs(newDate).format('YYYY-MM-DD')).then(response=>{
             setStats(response)
             if (response.suggestions.length === 1) {
                 setSuggestions(response.suggestions[0])
@@ -79,11 +79,10 @@ export default function ClientPageElement(id, client) {
         //event.preventDefault();
         console.log(postReviewRequest);
         setToggle(!toggle)
-        postReviewbyID("4", postReviewRequest).then(response => {
+        postReviewbyID(id.id, postReviewRequest).then(response => {
             console.log("done")
         })
     };
-
 
     return (
         <div className="clientPageWrapper">

@@ -24,16 +24,11 @@ export default function ClientsElement(id) {
             console.log("clients", resp)
             setClients(resp.clients)
         })
-
-        getClientByID('4').then((response) => {
-            console.log('4th client',response)
-        })
-
     }, []);
 
-    const redirectClientPage = () => {
-        getClientByID('4').then((response) => {
-            console.log('4th client',response)
+    const redirectClientPage = event => {
+        const clientId = event.currentTarget.id
+        getClientByID(event.currentTarget.id).then((response) => {
             history.push({pathname: "/client", state: {id: id.id, client: response}})
         })
     }
@@ -78,12 +73,14 @@ export default function ClientsElement(id) {
 
         <div className="clientsHeader"><h1>Your Clients</h1></div>
         <div className="clientsList">
-            <div className="clientElement" onClick={redirectClientPage}>
+        {clients.map(client => {
+            return (
+            <div className="clientElement" onClick={redirectClientPage} id={client.id}>
                 <div className="clientPhoto"><img className="photo" src = {userPhoto}></img></div>
-                <div className="clientStatus">Trainee</div>
-                <div className="clientName">Wade Warrens</div>
-                <div className="clientLastRecord">Last Recorded Session on Dec 1 2022</div>
+                <div className="clientStatus">{client.email}</div>
+                <div className="clientName">{client.name} {client.lastName}</div>
             </div>
+            )})}
         </div>
     </div>
   );

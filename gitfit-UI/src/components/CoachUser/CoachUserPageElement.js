@@ -3,7 +3,7 @@ import Calendar from 'react-calendar'
 import { NavLink as Link } from 'react-router-dom';
 import userPhoto from "../../assets/img/userPhoto.jpg"
 import './CoachUserPageElement.css';
-import { addCoachDetails, getUserDataByID } from "../../util/ApiUtils";
+import { addCoachDetails, getCoachByID, getUserDataByID } from "../../util/ApiUtils";
 import dayjs from 'dayjs'
 
 
@@ -24,7 +24,7 @@ export default function CoachPageElement(id) {
     useEffect(() => {
         console.log(date)
         console.log(id.id)
-        getUserDataByID(id.id).then((response) => {
+        getCoachByID(id.id).then((response) => {
           setViewAbout(response.aboutMe);
           setViewAddrress(response.gymAddress);
           setViewRatePerHour(response.ratePerHour);

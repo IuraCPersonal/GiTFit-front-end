@@ -10,7 +10,7 @@ import { getPending } from "../../util/ApiUtils";
 export default function ClientsPage(props) {
 
   const [id, setId] = useState(props.location.state.id); 
-  
+
     return (
       <div style={{backgroundColor: "#131F2B"}}>
           <Route>
