@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route} from "react-router-dom";
 
 
 import Navbar from "../../components/Navbar/navbar";
-import Sidebar from "../../components/Sidebar/sidebar";
 import CoachUserPageElement from "../../components/CoachUser/CoachUserPageElement"
 
 export default function CoachUserPage(props) {
@@ -17,7 +16,6 @@ export default function CoachUserPage(props) {
               id={props.location.state.id}
               role={"COACH"}
             />
-            <Sidebar/>
           </Route>
           <div style = {{display: "flex", justifyContent: "center", paddingTop: "5%", paddingBottom: "30%"}}>
             <CoachUserPageElement

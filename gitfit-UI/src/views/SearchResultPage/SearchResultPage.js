@@ -7,8 +7,6 @@ import CoachSearchElement from "../../components/Search/CoachSearchElement"
 
 export default function SearchResultsPage(props) {
   
-
-    const[isOpen, setIsOpen] = useState(false);
     const [id, setId] = useState(props.location.state.id);
     const [coaches, setCoaches] = useState(props.location.state.coaches)
 

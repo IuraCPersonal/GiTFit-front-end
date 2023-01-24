@@ -12,6 +12,13 @@ import './ClientPageElement.css';
 
 export default function ClientPageElement(id, client) {
 
+    const current = new Date();
+    const currentDate = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
+    const [toggle, setToggle] = useState(false)
+    const [coach, setCoach] = useState("")
+    const [date, setDate] = useState(new Date());
+
+
     useEffect(() => {
         console.log("HERE")
         console.log("id", id.id)
@@ -23,19 +30,10 @@ export default function ClientPageElement(id, client) {
 
     }, []);
 
-    const [date, setDate] = useState(new Date());
-
     const onDateChange = (newDate) => {
         setDate(newDate);
         console.log(newDate);
     }
-
-    const current = new Date();
-    const currentDate = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
-
-    const [toggle, setToggle] = useState(false)
-    const [coach, setCoach] = useState("")
-
 
     return (
         <div className="clientPageWrapper">

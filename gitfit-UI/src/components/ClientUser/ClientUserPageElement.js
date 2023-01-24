@@ -24,7 +24,9 @@ export default function ClientPageElement(id) {
     const [weight, setWeight] = useState("");
     const [fatRatio, setFatRatio] = useState("");
     const [diet, setDiet] = useState("");
-
+    const current = new Date();
+    const currentDate = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
+    const [toggle, setToggle] = useState(false)
 
 
     const onDateChange = (newDate) => {
@@ -92,11 +94,6 @@ export default function ClientPageElement(id) {
             setDiet(value);
         }
     };
-
-    const current = new Date();
-    const currentDate = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
-    
-    const [toggle, setToggle] = useState(false)
 
     return (
         <div className="clientPageWrapper">

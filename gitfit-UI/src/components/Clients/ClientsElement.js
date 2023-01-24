@@ -16,13 +16,6 @@ export default function ClientsElement(id) {
 
     let history = useHistory();
 
-    const redirectClientPage = () => {
-        getUserDataByID('8').then((response) => {
-            console.log(response)
-            history.push({pathname: "/client", state: {id: id.id, client: response}})
-        })
-    }
-
     useEffect(() => {
         getPending().then((response) => {
             setPending(response)
@@ -31,6 +24,13 @@ export default function ClientsElement(id) {
             setClients(response.clients)
         })
     }, []);
+
+    const redirectClientPage = () => {
+        getUserDataByID('8').then((response) => {
+            console.log(response)
+            history.push({pathname: "/client", state: {id: id.id, client: response}})
+        })
+    }
 
     const handleAccept = event => {
         // 👇️ prevent page refresh

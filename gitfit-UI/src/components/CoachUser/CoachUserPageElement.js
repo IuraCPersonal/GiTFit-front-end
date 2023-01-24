@@ -1,8 +1,6 @@
 import React , {useState, useEffect} from "react";
 import Calendar from 'react-calendar'
-import { BrowserRouter as Router, useHistory} from "react-router-dom";
 import { NavLink as Link } from 'react-router-dom';
-import {AiFillPlusCircle} from 'react-icons/ai'
 import userPhoto from "../../assets/img/userPhoto.jpg"
 import './CoachUserPageElement.css';
 import { addCoachDetails, getUserDataByID } from "../../util/ApiUtils";
@@ -11,14 +9,13 @@ import dayjs from 'dayjs'
 
 export default function CoachPageElement(id) {
 
-    //const [date, setDate] = useState(new Date());
     const[aboutMe,setAbout] = useState("");
     const[gymAddress,setAddress] = useState("");
     const[ratePerHour,setRatePerHour] = useState("");
     const[viewAbout, setViewAbout] = useState("");
     const[viewRatePerHour, setViewRatePerHour] = useState("");
     const[viewAddrress, setViewAddrress] = useState("");
-
+    const [toggle, setToggle] = useState(false)
     const current = new Date();
     const currentDate = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
     const [oldDate, setDate] = useState(new Date());
@@ -34,10 +31,6 @@ export default function CoachPageElement(id) {
        })
     }, []);
 
-    /*const onDateChange = (newDate) => {
-        setDate(newDate);
-        console.log(newDate);
-    }*/
     const onDateChange = (newDate) => {
         setDate(newDate);
         console.log(newDate);
@@ -67,11 +60,6 @@ export default function CoachPageElement(id) {
         }
     }
 
-    //const current = new Date();
-    //const currentDate = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
-    
-    const [toggle, setToggle] = useState(false)
-
     return (
         <div className="coachPersonalPageWrapper">
             <div className="left">
@@ -80,8 +68,6 @@ export default function CoachPageElement(id) {
                     <div>{viewAbout}</div>
                     <div className="titleCoachPage"style={{fontWeight: "700", fontSize: "25px"}}>Rate per hour</div>
                     <div className="hourRate">{viewRatePerHour}$</div>
-                    {/*<div className="titleCoachPage"style={{fontWeight: "700", fontSize: "25px"}}>Gym Adress</div>
-                    <div>{viewAddrress}</div>*/}
                     <div style={{paddingTop:'20px', paddingBottom:'20px'}}><button  onClick={() => setToggle(!toggle)}>Edit</button></div>
 
                     {toggle && (
@@ -97,12 +83,6 @@ export default function CoachPageElement(id) {
                                 <div> Rate per hour (in dollars)</div>  
                                 <input style={{height: "50px"}} type="text"  onChange = {(e) => handleInputChange(e)} id="ratePerHour" placeholder="$"/>
                             </label></div>
-
-                             {/*<div style = {{ gridColumn: "2", gridRow: "2"}}><label>
-                                <div>Gym address</div>  
-                                <input style={{height: "50px"}} type="text" value={gymAddress} onChange = {(e) => handleInputChange(e)} id="address" placeholder="Gym Adress"/>
-                    </label></div>*/}
-
                             <div>
                                 <input  type="submit" value="Submit" onClick={handleSubmit} style={{width: "172px", height: "56px"}}/>
                             </div>
