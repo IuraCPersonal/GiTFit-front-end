@@ -17,7 +17,9 @@ export default function CoachPage(props) {
             />
           </Route>
           <div style = {{display: "flex", justifyContent: "center", paddingTop: "5%", paddingBottom: "30%"}}>
-            <CoachPageElement/>
+            <CoachPageElement
+              id={props.location.state.id}
+            />
           </div>
       </div>
     );
