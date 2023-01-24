@@ -4,8 +4,9 @@ import { BrowserRouter as Router, useHistory} from "react-router-dom";
 import { NavLink as Link } from 'react-router-dom';
 import {BiCommentEdit} from 'react-icons/bi'
 import userPhoto from "../../assets/img/userPhoto.jpg"
+import dayjs from 'dayjs'
 
-import { getUserDataByID } from "../../util/ApiUtils";
+import { getUserDataByID, getStatsByID } from "../../util/ApiUtils";
 
 
 import './ClientPageElement.css';
@@ -14,9 +15,11 @@ export default function ClientPageElement(id, client) {
 
     const current = new Date();
     const currentDate = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
+    const [oldDate, setDate] = useState(new Date());
+    const [date, setNewFormatDate] = useState(currentDate);
     const [toggle, setToggle] = useState(false)
     const [coach, setCoach] = useState("")
-    const [date, setDate] = useState(new Date());
+    const [stats, setStats] = useState("")
 
 
     useEffect(() => {
@@ -33,12 +36,27 @@ export default function ClientPageElement(id, client) {
     const onDateChange = (newDate) => {
         setDate(newDate);
         console.log(newDate);
+        setNewFormatDate(dayjs(newDate).format('YYYY-MM-DD'))
+        console.log(dayjs(newDate).format('YYYY-MM-DD'))
+
+        getStatsByID("4", dayjs(newDate).format('YYYY-MM-DD')).then(response=>{
+            setStats(response)
+            //setSugestions(response.suggestions)
+            console.log("here", response)
+            console.log(stats)
+            //if (!response.ok){throw new Error ('Bad Response');} 
+            //else { return response.json()};
+        }).catch(error => {
+            // if in a loop can also log which url failed;
+            console.log('error made: ', error);
+         });
     }
+
 
     return (
         <div className="clientPageWrapper">
             <div className="left">
-                <div className="clientPageCalendar"><Calendar onChange={onDateChange} value={date} /></div>
+                <div className="clientPageCalendar"><Calendar onChange={onDateChange} value={oldDate} /></div>
 
                 <div className="clientLatestStats">
                     <div className="clientProfileWrapper">
@@ -46,40 +64,23 @@ export default function ClientPageElement(id, client) {
                         <div className="clientUsername">{id.client.username}</div>
                         <div className="clientName" style = {{fontWeight: 900, paddingLeft: "5px"}}>{id.client.name} {id.client.lastName}</div>
                     </div>
-                    <div className="latestStatsTitleWrapper">
-                        <div style={{fontWeight: "700", fontSize: "37px"}}>{id.client.name}'s Latest Stats</div>
-                        <div style={{fontWeight: "500"}}>as of {currentDate}</div>
-                    </div>
-                    <div className="clientPageStats">
-                        <div className="ClientPageStatName">Weight-In</div>
-                        <div className="clientPageStatValue">100 kg</div>
-
-                        <div className="ClientPageStatName">Bodyfat Percentage</div>
-                        <div className="clientPageStatValue">11 %</div>
-
-                        <div className="ClientPageStatName">Max Bench Press</div>
-                        <div className="clientPageStatValue">90 kg / 1 rep</div>
-                    </div>
                 </div>
             </div>
             
             <div className="clientPageStatsWrapper">
-                <div className="clientPageDate">{date.toDateString()}</div>
+                <div className="clientPageDate">{date}</div>
                 <div className="clientPageStats">
-                    <div className="ClientPageStatName">Weight-In</div>
-                    <div className="clientPageStatValue">100 kg</div>
+                    <div className="ClientPageStatName">Weight</div>
+                    <div className="clientPageStatValue">{stats.weight}</div>
 
-                    <div className="ClientPageStatName">Bodyfat Percentage</div>
-                    <div className="clientPageStatValue">11 %</div>
+                    <div className="ClientPageStatName">Height</div>
+                    <div className="clientPageStatValue">{stats.height}</div>
 
-                    <div className="ClientPageStatName">Max Bench Press</div>
-                    <div className="clientPageStatValue">90 kg / 1 rep</div>
+                    <div className="ClientPageStatName">Fat Ratio</div>
+                    <div className="clientPageStatValue">{stats.fatRatio}</div>
 
-                    <div className="ClientPageStatName">Max Bench Press</div>
-                    <div className="clientPageStatValue">90 kg / 1 rep</div>
-
-                    <div className="ClientPageStatName">Max Bench Press</div>
-                    <div className="clientPageStatValue">90 kg / 1 rep</div> 
+                    <div className="ClientPageStatName">Diet</div>
+                    <div className="clientPageStatValue">{stats.diet}</div>
 
                     <div className="clientPageLeaveNote">
                         <div  onClick={() => setToggle(!toggle)}>

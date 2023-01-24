@@ -26,7 +26,7 @@ export default function ClientsElement(id) {
     }, []);
 
     const redirectClientPage = () => {
-        getUserDataByID('8').then((response) => {
+        getUserDataByID('4').then((response) => {
             console.log(response)
             history.push({pathname: "/client", state: {id: id.id, client: response}})
         })
