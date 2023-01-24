@@ -25,7 +25,7 @@ export default function ClientPageElement(id, coach) {
                     <div className="titleCoachPage"style={{fontWeight: "700", fontSize: "25px"}}>About me</div>
                     <div>{currentCoach.aboutMe}</div>
                     <div className="titleCoachPage"style={{fontWeight: "700", fontSize: "25px"}}>Rate per hour</div>
-                    <div className="hourRate">{currentCoach.ratePerHour}</div>
+                    <div className="hourRate">{currentCoach.ratePerHour}$</div>
                 </div>
             </div>        
             <div className="clientElement">

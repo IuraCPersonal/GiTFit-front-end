@@ -105,7 +105,7 @@ export default function CoachPageElement(id) {
             
             <div className="clientPageStatsWrapper">
                 {/*<div className="clientPageDate">{date}</div>*/}
-                {schedule.map((ses) => {
+                {schedule.reverse().map((ses) => {
                     return (<div className="coachPersonalSessions">
                 
                     <div>
